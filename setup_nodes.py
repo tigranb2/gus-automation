@@ -110,9 +110,6 @@ def prepare_remote_exp_and_bin_directories(config, results_extension, executor):
         futures.append(executor.submit(prepare_remote_exp_and_bin_directory, config, server_name,
                                        remote_directory, remote_binary_directory))
 
-    futures.append(executor.submit(prepare_remote_exp_and_bin_directory, config, 'client',
-                                   remote_directory, remote_binary_directory))
-
     concurrent.futures.wait(futures)
     return remote_directory
 
@@ -149,12 +146,6 @@ def copy_binaries_to_machines(config, executor):
                                        gus_epaxos_control_bin_directory, server_url, gus_epaxos_remote_bin_directory))
         futures.append(executor.submit(copy_local_directory_to_remote,
                                        gryff_control_bin_directory, server_url, gryff_remote_bin_directory))
-
-    client_url = get_machine_url(config, 'client')
-    futures.append(executor.submit(copy_local_directory_to_remote,
-                                   gus_epaxos_control_bin_directory, client_url, gus_epaxos_remote_bin_directory))
-    futures.append(executor.submit(copy_local_directory_to_remote,
-                                   gryff_control_bin_directory, client_url, gryff_remote_bin_directory))
 
     concurrent.futures.wait(futures)
 

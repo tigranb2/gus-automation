@@ -27,7 +27,7 @@ def run_experiment(results_extension, config_file_path):
         timestamp = setup_nodes(config, executor, results_extension)
 
         # results_extension is timestamp; if the function is called as a script we use timestamp for results folder name
-        if results_extension == None:
+        if results_extension is None:
             results_extension = timestamp
 
 
@@ -141,10 +141,11 @@ def run_standard_experiment(server_names_to_internal_ips, config, timestamp, exe
     print("starting machines")
     master_thread = start_master(config, timestamp)
     server_threads = start_servers(config, timestamp, server_names_to_internal_ips)
-    client_thread = start_clients(config, timestamp, server_names_to_internal_ips)
+    client_threads = start_clients(config, timestamp, server_names_to_internal_ips)
 
     print('waiting for client to finish')
-    client_thread.wait()
+    _ = [p.wait() for p in client_threads]
+    # print(exit_codes)
 
     print("killing master and server")
     kill_machines(config, executor)
@@ -163,6 +164,7 @@ def kill_machines(config, executor):
     for server_name in config['server_names']:
         server_url = get_machine_url(config, server_name)
         futures.append(executor.submit(run_remote_command_sync('killall -9 server', server_url)))
+        futures.append(executor.submit(run_remote_command_sync('killall -9 client', server_url)))
 
     concurrent.futures.wait(futures)
 
@@ -197,14 +199,23 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
 
 
 def start_clients(config, timestamp, server_names_to_internal_ips):
-    # Client machine is colocated with first metadata server in layered experiments
-    if config['layered']:
-        client_url = get_machine_url(config, config['server_names'][0])
-    else:
-        client_url = get_machine_url(config, 'client')
+    client_threads = []
 
-    client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips)
-    return run_remote_command_async(client_command, client_url)
+    clients_started = 0
+
+    for server_name in config['server_names']:
+        if clients_started >= config['number_of_replicas']:
+            break
+
+        server_url = get_machine_url(config, server_name)
+        client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, server_name)
+        client_threads.append(run_remote_command_async(client_command, server_url))
+
+        clients_started += 1
+
+    # I assume there is no way we can detect when the servers are initialized.
+    time.sleep(5)
+    return client_threads
 
 
 def collect_exp_data(config, timestamp, executor):
@@ -219,12 +230,12 @@ def collect_exp_data(config, timestamp, executor):
                                                 os.path.join(control_exp_directory, 'server-%s' % server_name),
                                                 server_url, remote_exp_directory))
 
-    client_url = get_machine_url(config, 'client')
-    path_to_client_data = os.path.join(control_exp_directory, 'client')
-    download_futures.append(
-        executor.submit(copy_remote_directory_to_local, os.path.join(control_exp_directory, 'client'), client_url,
-                        remote_exp_directory))
+        # get client data
+        download_futures.append(
+            executor.submit(copy_remote_directory_to_local, os.path.join(control_exp_directory, 'client'), server_url,
+                            remote_exp_directory))
 
+    path_to_client_data = os.path.join(control_exp_directory, 'client')
     concurrent.futures.wait(download_futures)
 
     return path_to_client_data

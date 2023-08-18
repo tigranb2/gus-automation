@@ -92,36 +92,25 @@ def get_replication_protocol_args(replication_protocol):
         exit(1)
 
 
-def get_client_cmd(config, timestamp, server_names_to_ips):
+def get_client_cmd(config, timestamp, server_names_to_ips, server_name):
     exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp);
     if config['replication_protocol'] == "gryff":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'client')
     else:
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'client')
 
-    master_addr = server_names_to_ips[config['server_names'][0]]
+    server_addr = server_names_to_ips[server_name]
 
-    if config['layered'] or config['EC']:
-        client_command = ' '.join([str(x) for x in [
-            path_to_client_bin,
-            '-maddr=%s' % master_addr,
-            '-writes=%f' % config['write_percentage'],
-            '-c=%d' % config['conflict_percentage'],
-            '-T=1', # Number of clients is hardcoded to 1 for layered experiments
-            '-size=%f' % config['size'], # size is 4MB by default for layered and EC but in some figs (9) it 
-            '-redis=%d' % config['number_of_replicas']
-        ]])
-    else:
-        client_command = ' '.join([str(x) for x in [
-            path_to_client_bin,
-            '-maddr=%s' % master_addr,
-            '-writes=%f' % config['write_percentage'],
-            '-c=%d' % config['conflict_percentage'],
-            '-T=%d' % (int(config['clients_per_replica']) * config['number_of_replicas'])
-        ]])
+    client_command = ' '.join([str(x) for x in [
+        path_to_client_bin,
+        '-saddr=%s' % server_addr,
+        '-writes=%f' % config['write_percentage'],
+        '-c=%d' % config['conflict_percentage'],
+        '-T=%d' % int(config['clients_per_replica'])
+    ]])
 
-        if config['replication_protocol'] == "gryff":
-            client_command += " -proxy"
+    if config['replication_protocol'] == "gryff":
+        client_command += " -proxy"
 
     # Only run client for 3 minutes.
     timeout = "180s"
