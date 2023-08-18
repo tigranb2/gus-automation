@@ -141,6 +141,7 @@ def run_standard_experiment(server_names_to_internal_ips, config, timestamp, exe
     print("starting machines")
     master_thread = start_master(config, timestamp)
     server_threads = start_servers(config, timestamp, server_names_to_internal_ips)
+    time.Sleep(5)
     client_threads = start_clients(config, timestamp, server_names_to_internal_ips)
 
     print('waiting for client to finish')
