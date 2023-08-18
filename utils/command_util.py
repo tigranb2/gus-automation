@@ -102,12 +102,11 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'client')
 
     server_addr = server_names_to_ips[config['server_names'][server_id]]
-    server_port = 7070 + server_id
 
     client_command = ' '.join([str(x) for x in [
         path_to_client_bin,
         '-saddr=%s' % server_addr,
-        '-sport=%d' % server_port,
+        '-serverID=%d' % server_id,
         '-writes=%f' % config['write_percentage'],
         '-c=%d' % config['conflict_percentage'],
         '-T=%d' % int(config['clients_per_replica'])
