@@ -74,9 +74,9 @@ def run():
         if "fig11" in config_path:
             protocols = ["gus"]
 
-        # Gryff and Pineapple only for the time being
+        # Gus only for the time being
         if "fig5" in config_path:
-            protocols = ["gryff", "pineapple"]
+            protocols = ["gus"]
           
         print("Config path = " , config_path)
 
