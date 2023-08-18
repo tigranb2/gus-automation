@@ -73,6 +73,10 @@ def run():
         # Fig 11 and 8 is just gus
         if "fig11" in config_path:
             protocols = ["gus"]
+
+        # Gryff and Pineapple only for the time being
+        if "fig5" in config_path:
+            protocols = ["gryff", "pineapple"]
           
         print("Config path = " , config_path)
 
@@ -99,8 +103,6 @@ def run():
 
                     setup_network_delay(config_path)
                     run_experiment(results_extension_fig7, config_path)
-
-            
             # This is the Cloudlab experiment that should really be run with 3 and 5 replicas
             elif "fig8n5.json" in config_path:
 
@@ -140,9 +142,6 @@ def run():
 
                     setup_network_delay(config_path)
                     run_experiment(results_extension_add, config_path)
-            
-                
-
             else:
                 setup_network_delay(config_path)
                 run_experiment(results_extension, config_path)

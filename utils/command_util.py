@@ -14,6 +14,8 @@ def get_master_cmd(config, timestamp):
     exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp);
     if config['replication_protocol'] == "gryff":
         path_to_master_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'master')
+    elif config['replication_protocol'] == "pineapple":
+        path_to_master_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'master')
     else:
         path_to_master_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'master')
 
@@ -79,7 +81,7 @@ def get_server_cmd(config, timestamp, server_names_to_ips, server_name):
     return server_command
 
 def get_replication_protocol_args(replication_protocol):
-    if replication_protocol == "gus":
+    if replication_protocol == "gus" or replication_protocol == "pineapple":
         return ""
     elif replication_protocol == "epaxos":
         return "-gus=false -e=true"
@@ -92,18 +94,19 @@ def get_replication_protocol_args(replication_protocol):
         exit(1)
 
 
-def get_client_cmd(config, timestamp, server_names_to_ips, server_name):
+def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp);
     if config['replication_protocol'] == "gryff":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'client')
     else:
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'client')
 
-    server_addr = server_names_to_ips[server_name]
+    master_addr = server_names_to_ips[config['server_names'][0]]
 
     client_command = ' '.join([str(x) for x in [
         path_to_client_bin,
-        '-saddr=%s' % server_addr,
+        '-maddr=%s' % master_addr,
+        '-serverID=%d' % server_id,
         '-writes=%f' % config['write_percentage'],
         '-c=%d' % config['conflict_percentage'],
         '-T=%d' % int(config['clients_per_replica'])

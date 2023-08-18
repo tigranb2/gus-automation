@@ -208,7 +208,7 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
             break
 
         server_url = get_machine_url(config, server_name)
-        client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, server_name)
+        client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, clients_started)
         client_threads.append(run_remote_command_async(client_command, server_url))
 
         clients_started += 1
