@@ -76,7 +76,7 @@ def run():
 
         # Gus only for the time being
         if "fig5" in config_path:
-            protocols = ["gus", "pineapple"]
+            protocols = ["gus", "pineapple", "gryff"]
           
         print("Config path = " , config_path)
 
