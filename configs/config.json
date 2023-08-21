@@ -52,6 +52,7 @@
     "max_bandwidth": "1gibps",
     "gus_epaxos_control_src_directory": "/root/go/src/gus-epaxos",
     "gryff_control_src_directory": "/root/go/src/gryff-testing",
+    "pineapple_control_src_directory": "/root/go/src/pineapple",
     "base_control_experiment_directory": "/root/go/src/gus-automation/results",
     "base_remote_experiment_directory": "~/results",
     "remote_bin_directory": "~/bin",

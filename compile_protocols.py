@@ -14,6 +14,7 @@ if __name__ == '__main__':
     protocol_dirs = [
         config['gus_epaxos_control_src_directory'],
         config['gryff_control_src_directory']
+        config['pineapple_control_src_directory']
     ]
 
     for protocol_dir in protocol_dirs:
