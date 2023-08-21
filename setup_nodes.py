@@ -136,8 +136,11 @@ def copy_binaries_to_machines(config, executor):
 
     gus_epaxos_control_bin_directory = os.path.join(config['gus_epaxos_control_src_directory'], 'bin')
     gryff_control_bin_directory = os.path.join(config['gryff_control_src_directory'], 'bin')
+    pineapple_control_bin_directory = os.path.join(config['pineapple_control_src_directory'], 'bin')
     gus_epaxos_remote_bin_directory = os.path.join(config['remote_bin_directory'], 'gus-epaxos')
     gryff_remote_bin_directory = os.path.join(config['remote_bin_directory'], 'gryff')
+    pineapple_remote_bin_directory = os.path.join(config['remote_bin_directory'], 'pineapple')
+
 
     futures = []
     for server_name in config['server_names']:
