@@ -47,6 +47,8 @@ def get_server_cmd(config, timestamp, server_names_to_ips, server_name):
     exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp)
     if config['replication_protocol'] == "gryff":
         path_to_server_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'server')
+    elif config['replication_protocol'] == "pineapple":
+        path_to_master_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'server')
     else:
         path_to_server_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'server')
     server_addr = server_names_to_ips[server_name]
@@ -98,6 +100,9 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp);
     if config['replication_protocol'] == "gryff":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'client')
+    elif config['replication_protocol'] == "pineapple":
+        path_to_master_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'client')
+
     else:
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'client')
 
