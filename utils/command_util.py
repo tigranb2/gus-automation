@@ -108,14 +108,24 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
 
     server_addr = server_names_to_ips[config['server_names'][server_id]]
 
-    client_command = ' '.join([str(x) for x in [
-        path_to_client_bin,
-        '-saddr=%s' % server_addr,
-        '-serverID=%d' % server_id,
-        '-writes=%f' % config['write_percentage'],
-        '-c=%d' % config['conflict_percentage'],
-        '-T=%d' % int(config['clients_per_replica'])
-    ]])
+    if config['replication_protocol'] == "gryff":
+        client_command = ' '.join([str(x) for x in [
+            path_to_client_bin,
+            '-maddr=%s' % server_names_to_ips[config['server_names'][0]],
+            '-serverID=%d' % server_id,
+            '-writes=%f' % config['write_percentage'],
+            '-c=%d' % config['conflict_percentage'],
+            '-T=%d' % int(config['clients_per_replica'])
+        ]])
+    else:
+        client_command = ' '.join([str(x) for x in [
+            path_to_client_bin,
+            '-saddr=%s' % server_addr,
+            '-serverID=%d' % server_id,
+            '-writes=%f' % config['write_percentage'],
+            '-c=%d' % config['conflict_percentage'],
+            '-T=%d' % int(config['clients_per_replica'])
+        ]])
 
     if config['replication_protocol'] == "gryff":
         client_command += " -proxy"
