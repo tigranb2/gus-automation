@@ -143,9 +143,13 @@ def run_standard_experiment(server_names_to_internal_ips, config, timestamp, exe
     server_threads = start_servers(config, timestamp, server_names_to_internal_ips)
     client_threads = start_clients(config, timestamp, server_names_to_internal_ips)
 
-    print('waiting for client to finish')
-    _ = [p.wait() for p in client_threads]
-    # print(exit_codes)
+    if config['replication_protocol'] == "gryff":
+        print('waiting for client to finish')
+        client_threads.wait()
+    else:
+        print('waiting for clients to finish')
+        _ = [p.wait() for p in client_threads]
+        # print(exit_codes)
 
     print("killing master and server")
     kill_machines(config, executor)
@@ -202,20 +206,21 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
     client_threads = []
 
     clients_started = 0
+    if config['replication_protocol'] == "gryff":
+        client_url = get_machine_url(config, 'client')
+        client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips)
+        return run_remote_command_async(client_command, client_url)
+    else:
+        for server_name in config['server_names']:
+            if clients_started >= config['number_of_replicas']:
+                break
 
-    for server_name in config['server_names']:
-        if clients_started >= config['number_of_replicas']:
-            break
+            server_url = get_machine_url(config, server_name)
+            client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, clients_started)
+            client_threads.append(run_remote_command_async(client_command, server_url))
 
-        server_url = get_machine_url(config, server_name)
-        client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, clients_started)
-        client_threads.append(run_remote_command_async(client_command, server_url))
-
-        clients_started += 1
-
-    # I assume there is no way we can detect when the servers are initialized.
-    time.sleep(5)
-    return client_threads
+            clients_started += 1
+        return client_threads
 
 
 def collect_exp_data(config, timestamp, executor):
