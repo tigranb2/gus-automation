@@ -141,7 +141,6 @@ def copy_binaries_to_machines(config, executor):
     gryff_remote_bin_directory = os.path.join(config['remote_bin_directory'], 'gryff')
     pineapple_remote_bin_directory = os.path.join(config['remote_bin_directory'], 'pineapple')
 
-    print("\n\n\n\n\n\n", gryff_control_bin_directory, "\n\n\n\n")
     futures = []
     for server_name in config['server_names']:
         server_url = get_machine_url(config, server_name)
