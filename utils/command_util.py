@@ -91,8 +91,10 @@ def get_replication_protocol_args(replication_protocol):
         return "-t -proxy -exec=true -dreply=true"
     elif replication_protocol == "giza":
         return "-gus=false -f=true"
+    elif replication_protocol == "pqr":
+        return "-gus=false -exec=true"
     else:
-        print("ERROR: unknown replication protocol. Please choose between gus, epaxos, gryff, and giza")
+        print("ERROR: unknown replication protocol. Please choose between gus, epaxos, gryff, giza, and PQR")
         exit(1)
 
 
@@ -102,7 +104,6 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'client')
     elif config['replication_protocol'] == "pineapple":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'client')
-
     else:
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'client')
 

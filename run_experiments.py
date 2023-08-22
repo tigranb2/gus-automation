@@ -65,7 +65,7 @@ def run():
             update(config_path,"conflict_percentage", 25)
 
         # default is all protocols
-        protocols = ["gus", "epaxos", "gryff"]
+        protocols = ["pqr", "epaxos", "gryff"]
         # Figs 8 and 9 plotting is combined gus and giza only
         if "fig9" in config_path or "fig8" in config_path:
             protocols = ["gus", "giza"]
