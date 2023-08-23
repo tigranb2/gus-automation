@@ -16,7 +16,7 @@ linestyles = {"gryff":"dashdot", "pineapple":"solid"}
 labels = {"gryff":"Gryff", "pineapple":"Pineapple"} # properly stylized
 
 # New in development version with matplotlib
-def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, log=False):
+def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=False, log=False):
     # Reformat function header to just pass csvs dictionary 
     # csvs = {"gus": gus_csv, "gryff":gryff_csv, "epaxos":epaxos_csv}
     print("csvs = " , csvs)
@@ -44,8 +44,10 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, log=Fals
     # Adding labels
     ax.set_xlabel('Latency (ms)')
 
-    if is_for_reads == True:
+    if is_for_reads:
         ax.set_ylabel('Fraction of Reads')
+    elif rmw:
+        ax.set_ylabel('Fraction of RMW')
     else:
         ax.set_ylabel('Fraction of Writes')
     
