@@ -110,6 +110,9 @@ def prepare_remote_exp_and_bin_directories(config, results_extension, executor):
         futures.append(executor.submit(prepare_remote_exp_and_bin_directory, config, server_name,
                                        remote_directory, remote_binary_directory))
 
+    futures.append(executor.submit(prepare_remote_exp_and_bin_directory, config, 'client',
+                                   remote_directory, remote_binary_directory))
+
     concurrent.futures.wait(futures)
     return remote_directory
 
