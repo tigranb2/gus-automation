@@ -2,12 +2,13 @@ import os
 
 from utils.remote_util import *
 
+
 # runs a unix command and returns the output (that would be printed to stdout)
 def check_cmd_output(cmd):
-   # output = subprocess.check_output(cmd)
-    ps = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+    # output = subprocess.check_output(cmd)
+    ps = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = ps.communicate()[0]
-    return output.decode("utf-8").strip("\n") 
+    return output.decode("utf-8").strip("\n")
 
 
 def get_master_cmd(config, timestamp):
@@ -25,7 +26,7 @@ def get_master_cmd(config, timestamp):
     stderr_file = os.path.join(exp_directory, 'master-stderr.log')
 
     master_command = tcsh_redirect_output_to_files(master_command,
-                                               stdout_file, stderr_file)
+                                                   stdout_file, stderr_file)
     return master_command
 
 
@@ -42,6 +43,7 @@ def get_redis_server_cmd(config, timestamp, server_names_to_ips, server_name):
     server_command = tcsh_redirect_output_to_files(server_command,
                                                    stdout_file, stderr_file)
     return server_command
+
 
 def get_server_cmd(config, timestamp, server_names_to_ips, server_name):
     exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp)
@@ -79,8 +81,9 @@ def get_server_cmd(config, timestamp, server_names_to_ips, server_name):
     stderr_file = os.path.join(exp_directory, 'server-%s-stderr.log' % server_name)
 
     server_command = tcsh_redirect_output_to_files(server_command,
-                                                    stdout_file, stderr_file)
+                                                   stdout_file, stderr_file)
     return server_command
+
 
 def get_replication_protocol_args(replication_protocol):
     if replication_protocol == "gus" or replication_protocol == "pineapple":
@@ -140,5 +143,5 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     stdout_file = os.path.join(exp_directory, 'client-stdout.log')
     stderr_file = os.path.join(exp_directory, 'client-stderr.log')
     client_command = tcsh_redirect_output_to_files(client_command,
-                                               stdout_file, stderr_file)
+                                                   stdout_file, stderr_file)
     return client_command
