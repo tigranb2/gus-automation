@@ -166,6 +166,7 @@ def run():
                     setup_network_delay(config_path)
                     run_experiment(results_extension_add, config_path)
             else:
+                print('here')
                 setup_network_delay(config_path)
                 run_experiment(results_extension, config_path)
 
