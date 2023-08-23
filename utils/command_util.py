@@ -134,7 +134,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
         client_command += ' -proxy -rCount=%d' % config["number_of_replicas"]
 
     if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "pineapple":
-        client_command += ' -rmws=%d' % config["rmw_percentage"]
+        client_command += ' -rmws=%f' % config["rmw_percentage"]
 
         # Only run client for 3 minutes.
     timeout = "180s"
