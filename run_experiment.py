@@ -235,12 +235,19 @@ def collect_exp_data(config, timestamp, executor):
                                                 os.path.join(control_exp_directory, 'server-%s' % server_name),
                                                 server_url, remote_exp_directory))
 
-        # get client data
+        if config['replication_protocol'] != "gryff":
+            # get client data
+            download_futures.append(
+                executor.submit(copy_remote_directory_to_local, os.path.join(control_exp_directory, 'client'), server_url,
+                                remote_exp_directory))
+
+    if config['replication_protocol'] == "gryff":
+        client_url = get_machine_url(config, 'client')
+        path_to_client_data = os.path.join(control_exp_directory, 'client')
         download_futures.append(
-            executor.submit(copy_remote_directory_to_local, os.path.join(control_exp_directory, 'client'), server_url,
+            executor.submit(copy_remote_directory_to_local, os.path.join(control_exp_directory, 'client'), client_url,
                             remote_exp_directory))
 
-    path_to_client_data = os.path.join(control_exp_directory, 'client')
     concurrent.futures.wait(download_futures)
 
     return path_to_client_data
