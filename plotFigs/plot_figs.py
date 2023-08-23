@@ -45,15 +45,15 @@ def main(results_path):
                       latencies_folder_paths["pineapple"])
         elif fig == "gryffFig6a":
             print("Plotting gryffFig6a...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "4a", latencies_folder_paths["gryff"],
+            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6a", latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
         elif fig == "gryffFig6b":
             print("Plotting gryffFig6b...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "4b", latencies_folder_paths["gryff"],
+            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6b", latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
         elif fig == "gryffFig6c":
             print("Plotting gryffFig6c...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "4c", latencies_folder_paths["gryff"],
+            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6c", latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
         elif fig == "fig5":
             print("Plotting fig5...")
