@@ -11,9 +11,9 @@ from matplotlib.ticker import FixedLocator, FuncFormatter
 ### Helper functions for plotting ### 
 
 # Defining lines and colors
-colors = {"gryff":"green", "gus":"orange", "epaxos":"blue"}
-linestyles = {"gryff":"dashdot", "gus":"solid", "epaxos":"dotted"}
-labels = {"gryff":"Gryff", "gus":"Gus", "epaxos":"EPaxos"} # properly stylized
+colors = {"gryff":"green", "pineapple":"orange"}
+linestyles = {"gryff":"dashdot", "pineapple":"solid"}
+labels = {"gryff":"Gryff", "pineapple":"Pineapple"} # properly stylized
 
 # New in development version with matplotlib
 def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, log=False):
