@@ -51,7 +51,7 @@ def main(results_path):
             print("Plotting gryffFig6b...")
             plot_gryffFig6(plot_target_directory, csv_target_directory, "4b", latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
-        elif fig == "gryffFig6a":
+        elif fig == "gryffFig6c":
             print("Plotting gryffFig6c...")
             plot_gryffFig6(plot_target_directory, csv_target_directory, "4c", latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
