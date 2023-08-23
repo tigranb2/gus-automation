@@ -102,7 +102,7 @@ def get_replication_protocol_args(replication_protocol):
 
 
 def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
-    exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp);
+    exp_directory = os.path.join(config['base_remote_experiment_directory'], timestamp)
     if config['replication_protocol'] == "gryff":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'client')
     elif config['replication_protocol'] == "pineapple":

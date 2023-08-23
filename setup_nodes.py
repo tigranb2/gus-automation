@@ -14,7 +14,7 @@ from utils.git_util import *
 
 def setup_nodes(config, executor, results_extension):
     switch_branches(config)
-    # make_binaries(config)
+    make_binaries(config)
     timestamp = prepare_control_exp_directory(config, results_extension)
 
     temp = results_extension
@@ -71,9 +71,9 @@ def make_repo_binaries(repo_directory):
     e["GOPATH"] = repo_directory # the bin directory will be located inside the repo
 
     # Make binaries in bin directory (located at <repo_directory>/bin).
-    subprocess.call(["go", "install", "master"], cwd=repo_directory, env=e)
-    subprocess.call(["go", "install", "server"], cwd=repo_directory, env=e)
-    subprocess.call(["go", "install", "client"], cwd=repo_directory, env=e)
+    #subprocess.call(["go", "install", "master"], cwd=repo_directory, env=e)
+    # subprocess.call(["go", "install", "server"], cwd=repo_directory, env=e)
+    # subprocess.call(["go", "install", "client"], cwd=repo_directory, env=e)
 
 
 def prepare_control_exp_directory(config, exp_dir_extension, config_file=None ):
