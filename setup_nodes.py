@@ -14,7 +14,7 @@ from utils.git_util import *
 
 def setup_nodes(config, executor, results_extension):
     switch_branches(config)
-    make_binaries(config)
+    # make_binaries(config)
     timestamp = prepare_control_exp_directory(config, results_extension)
 
     temp = results_extension
