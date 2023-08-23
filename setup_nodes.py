@@ -153,7 +153,9 @@ def copy_binaries_to_machines(config, executor):
 
     client_url = get_machine_url(config, 'client')
     futures.append(executor.submit(copy_local_directory_to_remote,
-                                    gryff_control_bin_directory, client_url, gryff_remote_bin_directory))
+                                   gus_epaxos_control_bin_directory, client_url, gus_epaxos_remote_bin_directory))
+    futures.append(executor.submit(copy_local_directory_to_remote,
+                                   gryff_control_bin_directory, client_url, gryff_remote_bin_directory))
 
     concurrent.futures.wait(futures)
 
