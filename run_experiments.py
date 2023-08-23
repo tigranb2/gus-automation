@@ -21,13 +21,12 @@ def replace_fig4(config_paths):
     parent_path = config_paths[0][:last_slash_index + 1]
 
     for config_path in config_paths:
-        if "fig4.json" in config_path:
+        if "fig4.json" or "gryffFig6" in config_path:
             # remove fig4 
             config_paths.remove(config_path)
 
-            # add fig4a fig4b fig4c
             for x in ["a", "b", "c"]:
-                config_paths.append(parent_path + "fig4" + x + ".json")
+                config_paths.append(parent_path + "gryffFig6" + x + ".json")
 
     return config_paths
 
@@ -57,11 +56,11 @@ def run():
         set_config(config_path)
 
         # adjusts conflict rate - NEED TO FIX PATHING - fig4a not showing up
-        if "fig4a" in config_path:
+        if "fig4a" or "gryffFig6a" in config_path:
             update(config_path,"conflict_percentage", 2)
-        elif "fig4b" in config_path:
+        elif "fig4b" or "gryffFig6b" in config_path:
             update(config_path,"conflict_percentage", 10)
-        elif "fig4c" in config_path:
+        elif "fig4c" or "gryffFig6c" in config_path:
             update(config_path,"conflict_percentage", 25)
 
         # default is pineapple and gryff protocols
