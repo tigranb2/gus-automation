@@ -59,7 +59,7 @@ def run():
     results_parent_path = Path(base_config["base_control_experiment_directory"]) / now_string
 
     config_paths = sys.argv[1:]
-
+    print('here')
     # Adjusts for fig4
     config_paths = replace_fig4(config_paths)
     config_paths = replace_gryffFig6(config_paths)
@@ -71,7 +71,6 @@ def run():
 
         # adjust user name
         set_config(config_path)
-
         # adjusts conflict rate - NEED TO FIX PATHING - fig4a not showing up
         if "fig4a" in config_path:
             update(config_path, "conflict_percentage", 2)
@@ -166,7 +165,6 @@ def run():
                     setup_network_delay(config_path)
                     run_experiment(results_extension_add, config_path)
             else:
-                print('here')
                 setup_network_delay(config_path)
                 run_experiment(results_extension, config_path)
 
