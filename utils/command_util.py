@@ -137,7 +137,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     # Run client in the experiment directory.
     client_command = "cd %s && %s" % (exp_directory, client_command)
 
-    stdout_file = os.#path.join(exp_directory, 'client-stdout.log')
+    stdout_file = os.path.join(exp_directory, 'client-stdout.log')
     stderr_file = os.path.join(exp_directory, 'client-stderr.log')
     client_command = tcsh_redirect_output_to_files(client_command,
                                                'client-stdout.log', 'client-stderr.log')
