@@ -37,7 +37,7 @@ def replace_gryffFig6(config_paths):
     parent_path = config_paths[0][:last_slash_index + 1]
 
     for config_path in config_paths:
-        if "gryffFig6" in config_path:
+        if "gryffFig6.json" in config_path:
             # remove fig4
             config_paths.remove(config_path)
 
@@ -59,7 +59,6 @@ def run():
     results_parent_path = Path(base_config["base_control_experiment_directory"]) / now_string
 
     config_paths = sys.argv[1:]
-    print('here')
     # Adjusts for fig4
     config_paths = replace_fig4(config_paths)
     config_paths = replace_gryffFig6(config_paths)
@@ -72,18 +71,11 @@ def run():
         # adjust user name
         set_config(config_path)
         # adjusts conflict rate - NEED TO FIX PATHING - fig4a not showing up
-        if "fig4a" in config_path:
+        if "fig4a" or "gryffFig6a" in config_path:
             update(config_path, "conflict_percentage", 2)
-        elif "fig4b" in config_path:
+        elif "fig4b" or "gryffFig6b" in config_path:
             update(config_path, "conflict_percentage", 10)
-        elif "fig4c" in config_path:
-            update(config_path, "conflict_percentage", 25)
-
-        if "gryffFig6a" in config_path:
-            update(config_path, "conflict_percentage", 2)
-        elif "gryffFig6b" in config_path:
-            update(config_path, "conflict_percentage", 10)
-        elif "gryffFig6c" in config_path:
+        elif "fig4c" or "gryffFig6c" in config_path:
             update(config_path, "conflict_percentage", 25)
 
         # default is pineapple and gryff protocols
