@@ -249,7 +249,7 @@ def collect_exp_data(config, timestamp, executor):
                             remote_exp_directory))
 
     concurrent.futures.wait(download_futures)
-
+    path_to_client_data = os.path.join(control_exp_directory, 'client')
     return path_to_client_data
 
 
