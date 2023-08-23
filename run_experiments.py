@@ -64,19 +64,19 @@ def run():
         elif "fig4c" in config_path:
             update(config_path,"conflict_percentage", 25)
 
-        # default is all protocols
-        protocols = ["pqr", "epaxos", "gryff"]
+        # default is pineapple and gryff protocols
+        protocols = ["gryff", "pineapple"]
         # Figs 8 and 9 plotting is combined gus and giza only
-        if "fig9" in config_path or "fig8" in config_path:
-            protocols = ["gus", "giza"]
-
-        # Fig 11 and 8 is just gus
-        if "fig11" in config_path:
-            protocols = ["gus"]
-
-        # Gus only for the time being
-        if "fig5" in config_path:
-            protocols = ["gus", "pineapple", "gryff"]
+        # if "fig9" in config_path or "fig8" in config_path:
+        #     protocols = ["gus", "giza"]
+        #
+        # # Fig 11 and 8 is just gus
+        # if "fig11" in config_path:
+        #     protocols = ["gus"]
+        #
+        # # Gus only for the time being
+        # if "fig5" in config_path:
+        #     protocols = ["gus", "pineapple", "gryff"]
           
         print("Config path = " , config_path)
 
