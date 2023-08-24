@@ -31,19 +31,19 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
     fig.set_figheight(1.5)
     fig.set_figwidth(6)
     # ax.margins(x=0.01)
-    ax.set_xlim(left=0)
 
 
     # d is data (singular)
     for protocol, d in data.items():
         print("d = ", d)
         ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol]) 
-    
+
     # Setting scale for y axis
     if log == True:
         ax.set_yscale('log')
         ax.set_ylim(bottom=.01)
     # Adding labels
+    ax.set_xlim(left=0)
     ax.set_xlabel('Latency (ms)')
 
     if is_for_reads:
