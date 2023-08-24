@@ -31,6 +31,7 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
     fig.set_figheight(1.5)
     fig.set_figwidth(6)
     ax.margins(x=0.01)
+    ax.xlim(xmin=0)
 
     # d is data (singular)
     for protocol, d in data.items():
