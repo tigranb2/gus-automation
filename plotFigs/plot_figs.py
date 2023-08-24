@@ -43,18 +43,6 @@ def main(results_path):
             print("Plotting fig4c...")
             plot_fig4(plot_target_directory, csv_target_directory, "4c", latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
-        elif fig == "gryffFig6a":
-            print("Plotting gryffFig6a...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6a", latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
-        elif fig == "gryffFig6b":
-            print("Plotting gryffFig6b...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6b", latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
-        elif fig == "gryffFig6c":
-            print("Plotting gryffFig6c...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6c", latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
         elif fig == "fig5":
             print("Plotting fig5...")
             plot_fig5(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
@@ -75,6 +63,26 @@ def main(results_path):
         elif fig == "fig11":
             # Old fig12 and fig12 n=5
             print("Seperate from automated plotting. Use scale/scale_plot.py. See README for details")
+        elif fig == "gryffFig6a":
+            print("Plotting gryffFig6a...")
+            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6a", latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"])
+        elif fig == "gryffFig6b":
+            print("Plotting gryffFig6b...")
+            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6b", latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"])
+        elif fig == "gryffFig6c":
+            print("Plotting gryffFig6c...")
+            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6c", latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"])
+        elif fig == "gryffFig8":
+            print("Plotting gryffFig8...")
+            plot_gryffFig8(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
+                      latencies_folder_paths["pineapple"])
+        elif fig == "gryffFig9":
+            print("Plotting gryffFig9...")
+            plot_gryffFig9(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
+                      latencies_folder_paths["pineapple"])
         else:
             print("Default reached, Plotting Case not found")
 
@@ -99,15 +107,6 @@ def plot_fig4(plot_target_directory, csv_target_directory, figure_name, gryff_la
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
 
 
-def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder):
-    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,
-                                                     pineapple_latency_folder, True)
-
-    cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
-    cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
-    cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
-
-
 # Plots log scale writes only
 def plot_fig9(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder):
     _, _, _, write_log_csvs = calculate_csvs_cdf("9", csv_target_directory, gryff_latency_folder,
@@ -124,6 +123,42 @@ def plot_fig6(plot_target_directory, results_path, csv_target_directory, latenci
     # throughputs is a dictionary of throughputs (lookup via throughputs[protocol][wp])
     throughputs = calculate_tput_wp("6", results_path, csv_target_directory, latencies_folder_paths)
     tput_wp_plot(plot_target_directory, "6", throughputs)
+
+
+def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder):
+    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,
+                                                                  pineapple_latency_folder, True)
+
+    cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
+    cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
+    cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
+
+def plot_gryffFig8(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder):
+    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff8", csv_target_directory, gryff_latency_folder,
+                                                                  pineapple_latency_folder, True)
+
+    # Reads
+    cdf_csvs_to_plot(plot_target_directory, "gryff8", read_csvs, is_for_reads=True)
+
+    # Writes
+    cdf_csvs_to_plot(plot_target_directory, "gryff8" + "-write", write_csvs, is_for_reads=False)
+
+    # RMWs
+    cdf_csvs_to_plot(plot_target_directory, "gryff8" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
+
+
+def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder):
+    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff9", csv_target_directory, gryff_latency_folder,
+                                                                  pineapple_latency_folder, True)
+
+    # Reads
+    cdf_csvs_to_plot(plot_target_directory, "gryff9", read_csvs, is_for_reads=True)
+
+    # Writes
+    cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-write", write_csvs, is_for_reads=False)
+
+    # RMWs
+    cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
 
 # Returns a tuple of tuple of csv paths.
