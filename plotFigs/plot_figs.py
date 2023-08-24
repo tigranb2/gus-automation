@@ -105,7 +105,7 @@ def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gry
 
     cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
-    cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", read_csvs, is_for_reads=False, rmw=True)
+    cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
 
 # Plots log scale writes only
