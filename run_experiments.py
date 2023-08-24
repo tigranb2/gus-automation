@@ -102,18 +102,17 @@ def run():
             results_extension = Path(temp_path) / Path(protocol)
 
             # NOT SURE WHY - Gryff not working 
-            # For fig 7 (old fig 9 thought it was fig8), for each protocol, change throughput 
-            if "fig7" in trimmed_fig:
-
+            # For fig 6  (old fig 9 thought it was fig8, then fig7), for each protocol, change throughput
+            if "fig6" in trimmed_fig:
                 write_percentages = [.1, .3, .5, .7, .9]
                 for wr in write_percentages:
                     update(config_path, "write_percentage", wr)
 
-                    # For fig7, now results file structure is: TIMESTAMP/FIG7/PROTOCOL-WRITE_PERCENTAGE/CLIENT/...
-                    results_extension_fig7 = Path(str(results_extension) + "-" + (str(wr)))
+                    # For fig, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/...
+                    results_extension_fig6 = Path(str(results_extension) + "-" + (str(wr)))
 
                     setup_network_delay(config_path)
-                    run_experiment(results_extension_fig7, config_path)
+                    run_experiment(results_extension_fig6, config_path)
             elif "RMWFig6.json" in config_path:
                 rmw_percentages = [.1, .3, .5, .7, .9]
                 for rmw in rmw_percentages:
