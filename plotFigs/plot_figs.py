@@ -83,6 +83,10 @@ def main(results_path):
             print("Plotting gryffFig9...")
             plot_gryffFig9(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"])
+        elif fig == "RMWFig6":
+            print("Plotting RMWFig6...")
+            plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths)
+
         else:
             print("Default reached, Plotting Case not found")
 
@@ -124,6 +128,13 @@ def plot_fig6(plot_target_directory, results_path, csv_target_directory, latenci
     throughputs = calculate_tput_wp("6", results_path, csv_target_directory, latencies_folder_paths)
     tput_wp_plot(plot_target_directory, "6", throughputs)
 
+def plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
+    # For fig6, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/....
+    # latencies_folder_paths = TIMESTAMP/FIG6/PROTOCOL/
+
+    # throughputs is a dictionary of throughputs (lookup via throughputs[protocol][wp])
+    throughputs = calculate_tput_wp("rmw6", results_path, csv_target_directory, latencies_folder_paths)
+    tput_wp_plot(plot_target_directory, "rmw6", throughputs)
 
 def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder):
     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,

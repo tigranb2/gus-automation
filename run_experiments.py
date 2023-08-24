@@ -88,9 +88,6 @@ def run():
         # if "fig11" in config_path:
         #     protocols = ["gus"]
         #
-        # # Gus only for the time being
-        # if "fig5" in config_path:
-        #     protocols = ["gus", "pineapple", "gryff"]
 
         print("Config path = ", config_path)
 
@@ -117,6 +114,18 @@ def run():
 
                     setup_network_delay(config_path)
                     run_experiment(results_extension_fig7, config_path)
+            elif "RMWFig6.json" in config_path:
+                rmw_percentages = [.1, .3, .5, .7, .9]
+                for rmw in rmw_percentages:
+                    update(config_path, "rmw_percentage", rmw)
+                    wr = (1 - rmw) / 2  # split reads/writes evenly
+                    update(config_path, "write_percentage", wr)
+
+                    # For fig7, now results file structure is: TIMESTAMP/FIG7/PROTOCOL-RMW_PERCENTAGE/CLIENT/...
+                    results_extension_RMWfig6 = Path(str(results_extension) + "-" + (str(rmw)))
+
+                    setup_network_delay(config_path)
+                    run_experiment(results_extension_RMWfig6, config_path)
             # This is the Cloudlab experiment that should really be run with 3 and 5 replicas
             elif "fig8n5.json" in config_path:
 
