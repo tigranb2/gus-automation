@@ -3,9 +3,11 @@ import os
 import random
 
 
-def extract_norm_latencies(folder, is_for_reads):
+def extract_norm_latencies(folder, is_for_reads, rmw=False):
     if is_for_reads:
         log_files = glob.glob(os.path.join(folder, "latFileRead*"))
+    elif rmw:
+        log_files = glob.glob(os.path.join(folder, "latFileRMW*"))
     else:
         log_files = glob.glob(os.path.join(folder, "latFileWrite*"))
 

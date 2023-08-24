@@ -187,7 +187,7 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
 
         # Create dictionary of RMW latencies
         if rmw:
-            m_latencies = extract_norm_latencies(folder, is_for_reads=True)
+            m_latencies = extract_norm_latencies(folder, is_for_reads=False, rmw=True)
             rmw_latencies[protocol] = m_latencies
 
     print("read latencies: ", len(read_latencies))
