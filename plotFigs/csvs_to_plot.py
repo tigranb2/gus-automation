@@ -66,6 +66,7 @@ def tput_wp_plot(plot_target_directory, figure, throughputs):
     fig.set_figheight(1.5)
     fig.set_figwidth(6)
     ax.margins(x=0.01)
+    ax.xlim(xmin=0)
 
     print("throughputs = ", throughputs)
 
