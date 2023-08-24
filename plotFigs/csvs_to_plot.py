@@ -28,9 +28,9 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
     fig, ax = plt.subplots()
 
     # sizing and margins
-    # fig.set_figheight(1.5)
-    # fig.set_figwidth(6)
-    ax.margins(x=0.01)
+    fig.set_figheight(1.5)
+    fig.set_figwidth(6)
+    # ax.margins(x=0.01)
     ax.set_xlim(left=0)
 
 
