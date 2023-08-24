@@ -184,6 +184,8 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
         # Create dictionary of read latencies
         r_latencies = extract_norm_latencies(folder, is_for_reads=True)
         read_latencies[protocol] = r_latencies
+
+        # Create dictionary of RMW latencies
         if rmw:
             m_latencies = extract_norm_latencies(folder, is_for_reads=True)
             rmw_latencies[protocol] = m_latencies
@@ -212,12 +214,13 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
         write_csvs[protocol] = norm_cdf_csv
         write_log_csvs[protocol] = norm_log_cdf_csv
 
+    # rmw
     if rmw:
         for protocol, latency in rmw_latencies.items():
             norm_cdf_csv, norm_log_cdf_csv = latencies_to_csv(csv_target_directory, latency, protocol,
                                                               figure_name + "-rmw")
-        rmw_csvs[protocol] = norm_cdf_csv
-        rmw_log_csvs[protocol] = norm_log_cdf_csv
+            rmw_csvs[protocol] = norm_cdf_csv
+            rmw_log_csvs[protocol] = norm_log_cdf_csv
 
     if rmw:
         return read_csvs, write_csvs, read_log_csvs, write_log_csvs, rmw_csvs, rmw_log_csvs
