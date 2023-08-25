@@ -140,7 +140,7 @@ def extract_file_data(fig, protocol, f, dir_path, results_data):
     ignore = ["stderr", "stdout"]  # Files to ignore
     if not any(file in f for file in ignore):
         file_path = dir_path + "/" + f
-        file_key = get_file_key(f, file_path)
+        file_key = get_file_key(f, file_path, protocol)
 
         file_contents = np.loadtxt(file_path, dtype=float)
         if file_contents.ndim == 1:  # read empty RMW file
@@ -192,12 +192,15 @@ def results_data_to_metrics(options, results_data):
                 if "tput" not in file_key:  # add all Reads and Writes to total_protocol_data
                     total_protocol_data = np.concatenate([total_protocol_data, file_contents])
 
-            if protocol == "pineapple":
-                metrics[fig][protocol]["lattput.txt"] = {}
-                for file_key, _ in fig_val.items():
+            if "pineapple" in protocol:
+                metrics[fig][protocol]["tput"] = {}
+                for file_key, _ in protocol_val.copy().items():
                     if "tput" in file_key:
-                        metrics[fig][protocol]["lattput.txt"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["lattput.txt"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
-                        del metrics[fig][protocol]["lattput.txt"]
+                        if file_key == "tput":
+                            continue
+                        print(protocol, file_key, metrics[fig][protocol][file_key])
+                        metrics[fig][protocol]["tput"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["tput"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
+                        del metrics[fig][protocol][file_key]
 
             metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
 
@@ -266,8 +269,10 @@ def usage():
 
 
 # Gets file_key for results_data dict
-def get_file_key(f, file_path):
+def get_file_key(f, file_path, protocol):
     if "tput" in f:
+        if "pineapple" in protocol:
+            return f
         return "tput"
     else:
         return file_path.replace(".txt", "").split("lat")[
