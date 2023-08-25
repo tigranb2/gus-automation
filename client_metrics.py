@@ -198,7 +198,6 @@ def results_data_to_metrics(options, results_data):
                     if "tput" in file_key:
                         if file_key == "tput":
                             continue
-                        print(protocol, file_key, metrics[fig][protocol][file_key])
                         metrics[fig][protocol]["tput"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["tput"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
                         del metrics[fig][protocol][file_key]
 
