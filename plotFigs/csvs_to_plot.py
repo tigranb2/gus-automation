@@ -60,7 +60,7 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
 
 # Used for figure 6 - new version of plotting with matplotlib
 # throughputs is a dictionary indexed via: thoughputs[protocol][wp]
-def tput_wp_plot(plot_target_directory, figure, throughputs):
+def tput_wp_plot(plot_target_directory, figure, throughputs, rmw=False):
 
     fig, ax = plt.subplots()
 
@@ -76,7 +76,10 @@ def tput_wp_plot(plot_target_directory, figure, throughputs):
         d = np.sort(d) # sort the data before plotting
         ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol]) 
 
-    ax.set_xlabel("Write Percentage")
+    if rmw:
+        ax.set_xlabel("RMW Percentage")
+    else:
+        ax.set_xlabel("Write Percentage")
     ax.set_ylabel("Throughput (ops/s)")
 
     ax.legend()

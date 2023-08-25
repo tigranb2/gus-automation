@@ -192,6 +192,13 @@ def results_data_to_metrics(options, results_data):
                 if "tput" not in file_key:  # add all Reads and Writes to total_protocol_data
                     total_protocol_data = np.concatenate([total_protocol_data, file_contents])
 
+            if protocol == "pineapple":
+                metrics[fig][protocol]["lattput.txt"] = {}
+                for file_key, _ in fig_val.items():
+                    if "tput" in file_key:
+                        metrics[fig][protocol]["lattput.txt"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["lattput.txt"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
+                        del metrics[fig][protocol]["lattput.txt"]
+
             metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
 
     return metrics

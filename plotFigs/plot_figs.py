@@ -134,7 +134,7 @@ def plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, late
 
     # throughputs is a dictionary of throughputs (lookup via throughputs[protocol][wp])
     throughputs = calculate_tput_wp("rmw6", results_path, csv_target_directory, latencies_folder_paths)
-    tput_wp_plot(plot_target_directory, "rmw6", throughputs)
+    tput_wp_plot(plot_target_directory, "rmw6", throughputs, rmw=True)
 
 def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder):
     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,
@@ -242,9 +242,14 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
 def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies_folder_paths):
     # ex: gryff_latency_dict contains subfolders with write percentage 
     # should give a dictionary of p100 throughputs (I think this is "maximum attainable througput" as referenced in the NSDI23_GUS paper) with PROTOCOL-WP as key (outer key of fig6)
-    raw_throughputs = \
-    json.loads(check_cmd_output("python3 ../client_metrics.py 100 --onlytputs --path=" + results_path))[
-        "fig" + figure_name]
+    if figure_name == "rmw6":
+        raw_throughputs = \
+            json.loads(check_cmd_output("python3 ../client_metrics.py 100 --onlytputs --path=" + results_path))[
+            "RMWFig6"]
+    else:
+        raw_throughputs = \
+            json.loads(check_cmd_output("python3 ../client_metrics.py 100 --onlytputs --path=" + results_path))[
+            "fig" + figure_name]
 
     # 2D dictionary indexed like: throughputs[PROTOCOL][WRITE_PERCENTAGE]
     throughputs = {}
