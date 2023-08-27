@@ -137,7 +137,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
         client_command += ' -rmws=%f' % config["rmw_percentage"]
 
         # Only run client for 3 minutes.
-    timeout = "180s"
+    timeout = "%d" % config["experiment_length"] + "s"
     client_command = "timeout %s %s" % (timeout, client_command)
 
     # Run client in the experiment directory.
