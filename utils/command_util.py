@@ -54,7 +54,7 @@ def get_server_cmd(config, timestamp, server_names_to_ips, server_name):
     else:
         path_to_server_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'server')
     server_addr = server_names_to_ips[server_name]
-    master_addr = server_names_to_ips[config['server_names'][0]]
+    master_addr = get_machine_url(config, "client")
 
     server_command = ' '.join([str(x) for x in [
         path_to_server_bin,
