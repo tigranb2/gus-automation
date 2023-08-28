@@ -73,14 +73,15 @@ def tput_wp_plot(plot_target_directory, figure, throughputs, rmw=False):
 
     # d is data
     for protocol, d  in throughputs.items():
-        d = np.sort(d) # sort the data before plotting
-        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol]) 
+        d = d[d[:,0].argsort()]  # sort the data before plotting
+        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol])
 
     if rmw:
         ax.set_xlabel("RMW Percentage")
     else:
         ax.set_xlabel("Write Percentage")
     ax.set_ylabel("Throughput (ops/s)")
+    ax.set_ylim(bottom=0)
 
     ax.legend()
 
