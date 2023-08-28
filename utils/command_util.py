@@ -114,7 +114,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     if config['replication_protocol'] == "gryff":
         client_command = ' '.join([str(x) for x in [
             path_to_client_bin,
-            '-maddr=%s' % server_names_to_ips[config['server_names'][0]],
+            '-maddr=%s' % "10.10.1.1",
             '-writes=%f' % config['write_percentage'],
             '-c=%d' % config['conflict_percentage'],
             '-T=%d' % int(config['clients_per_replica'] * config['number_of_replicas'])
