@@ -175,8 +175,8 @@ def kill_machines(config, executor):
 
 def start_master(config, timestamp):
     master_command = get_master_cmd(config, timestamp)
-    # The first server listed in the 'server_names' config is the master server.
-    master_url = get_machine_url(config, config['server_names'][0])
+    # The client hosts the master server.
+    master_url = get_machine_url(config, "client")
     time.sleep(5)
 
     return run_remote_command_async(master_command, master_url)
