@@ -70,13 +70,6 @@ def run():
 
         # adjust user name
         set_config(config_path)
-        # adjusts conflict rate - NEED TO FIX PATHING - fig4a not showing up
-        if "fig4a" or "gryffFig6a" in config_path:
-            update(config_path, "conflict_percentage", 2)
-        elif "fig4b" or "gryffFig6b" in config_path:
-            update(config_path, "conflict_percentage", 10)
-        elif "fig4c" or "gryffFig6c" in config_path:
-            update(config_path, "conflict_percentage", 25)
 
         # default is pineapple and gryff protocols
         protocols = ["gryff", "pineapple"]
