@@ -72,7 +72,7 @@ def run():
         set_config(config_path)
 
         # default is pineapple and gryff protocols
-        protocols = ["gryff", "pineapple", "PQR"]
+        protocols = ["gryff", "pineapple", "pqr"]
         # Figs 8 and 9 plotting is combined gus and giza only
         # if "fig9" in config_path or "fig8" in config_path:
         #     protocols = ["gus", "giza"]

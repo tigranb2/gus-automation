@@ -96,7 +96,7 @@ def get_replication_protocol_args(replication_protocol):
     elif replication_protocol == "pqr":
         return "-gus=false -exec=true"
     else:
-        print("ERROR: unknown replication protocol. Please choose between gus, epaxos, gryff, giza, and PQR")
+        print("ERROR: unknown replication protocol. Please choose between gus, epaxos, gryff, giza, and PQR ", replication_protocol)
         exit(1)
 
 
