@@ -72,15 +72,14 @@ def run():
         set_config(config_path)
 
         # default is pineapple and gryff protocols
-        protocols = ["gryff", "pineapple"]
+        protocols = ["gryff", "pineapple", "PQR"]
         # Figs 8 and 9 plotting is combined gus and giza only
         # if "fig9" in config_path or "fig8" in config_path:
         #     protocols = ["gus", "giza"]
         #
-        # # Fig 11 and 8 is just gus
-        # if "fig11" in config_path:
-        #     protocols = ["gus"]
-        #
+        # Fig 6 is only Pineapple and Gryff
+        if "fig6" in config_path:
+            protocols = ["gryff", "pineapple"]
 
         print("Config path = ", config_path)
 
@@ -99,6 +98,7 @@ def run():
             if "fig6" in trimmed_fig:
                 write_percentages = [.1, .3, .5, .7, .9]
                 for wr in write_percentages:
+
                     update(config_path, "write_percentage", wr)
 
                     # For fig, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/...
