@@ -46,7 +46,7 @@ def main(results_path):
         elif fig == "fig5":
             print("Plotting fig5...")
             plot_fig5(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
+                      latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
         elif fig == "fig6":
             print("Plotting fig6...")
             plot_fig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths)
@@ -91,10 +91,10 @@ def main(results_path):
             print("Default reached, Plotting Case not found")
 
 
-def plot_fig5(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder):
+def plot_fig5(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
     # gryff_fig_csvs, gus_fig_csvs, epaxos_fig_csvs = calculate_fig_5_csvs(csv_target_directory, gryff_latency_folder, gus_latency_folder, epaxos_latency_folder)
     read_csvs, write_csvs, _, _ = calculate_csvs_cdf("5", csv_target_directory, gryff_latency_folder,
-                                                     pineapple_latency_folder)
+                                                     pineapple_latency_folder, pqr_latency_folder)
 
     # Reads
     cdf_csvs_to_plot(plot_target_directory, "5", read_csvs, is_for_reads=True)
@@ -174,10 +174,10 @@ def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_fo
 
 # Returns a tuple of tuple of csv paths.
 # This is used for figs 4 , 5 and 9
-def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, rmw=False):
+def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder, rmw=False):
     print("quick print")
-    protocols = ["gryff", "pineapple"]
-    folders = {"gryff": gryff_latency_folder, "pineapple": pineapple_latency_folder}
+    protocols = ["gryff", "pineapple", "PQR"]
+    folders = {"gryff": gryff_latency_folder, "pineapple": pineapple_latency_folder, "PQR": pqr_latency_folder}
 
     write_latencies = {}
     read_latencies = {}
