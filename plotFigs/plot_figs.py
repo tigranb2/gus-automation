@@ -34,15 +34,15 @@ def main(results_path):
         if fig == "fig4a":
             print("Plotting fig4a...")
             plot_fig4(plot_target_directory, csv_target_directory, "4a", latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
+                      latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
         elif fig == "fig4b":
             print("Plotting fig4b...")
             plot_fig4(plot_target_directory, csv_target_directory, "4b", latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
+                      latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
         elif fig == "fig4c":
             print("Plotting fig4c...")
             plot_fig4(plot_target_directory, csv_target_directory, "4c", latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"])
+                      latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
         elif fig == "fig5":
             print("Plotting fig5...")
             plot_fig5(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
@@ -103,9 +103,9 @@ def plot_fig5(plot_target_directory, csv_target_directory, gryff_latency_folder,
     cdf_csvs_to_plot(plot_target_directory, "5" + "-write", write_csvs, is_for_reads=False)
 
 
-def plot_fig4(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder):
+def plot_fig4(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
     read_csvs, write_csvs, _, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,
-                                                     pineapple_latency_folder)
+                                                     pineapple_latency_folder, pqr_latency_folder)
 
     cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
