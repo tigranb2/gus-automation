@@ -176,8 +176,8 @@ def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_fo
 # This is used for figs 4 , 5 and 9
 def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder, rmw=False):
     print("quick print")
-    protocols = ["gryff", "pineapple", "PQR"]
-    folders = {"gryff": gryff_latency_folder, "pineapple": pineapple_latency_folder, "PQR": pqr_latency_folder}
+    protocols = ["gryff", "pineapple", "pqr"]
+    folders = {"gryff": gryff_latency_folder, "pineapple": pineapple_latency_folder, "pqr": pqr_latency_folder}
 
     write_latencies = {}
     read_latencies = {}
