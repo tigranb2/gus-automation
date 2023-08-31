@@ -13,8 +13,8 @@ from utils.git_util import *
 
 
 def setup_nodes(config, executor, results_extension):
-    # switch_branches(config)
-    # make_binaries(config)
+    switch_branches(config)
+    make_binaries(config)
     timestamp = prepare_control_exp_directory(config, results_extension)
 
     temp = results_extension
@@ -43,7 +43,7 @@ def switch_branches(config):
         print("ERROR: supported number of replicas for gus, gryff, and epaxos is only 3 or 5")
         exit(1)
 
-    switch_to_branch(config['gus_epaxos_control_src_directory'], destination_branch, "gus-epaxos")
+    #switch_to_branch(config['gus_epaxos_control_src_directory'], destination_branch, "gus-epaxos")
     if not config['layered'] and not config["scale"]:
         switch_to_branch(config['gryff_control_src_directory'], destination_branch, "gryff")
 
