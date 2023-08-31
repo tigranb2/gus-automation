@@ -61,7 +61,6 @@ def switch_to_branch(src_directory, destination_branch, repo_name):
 
 def make_binaries(config):
     print("making binaries")
-    make_repo_binaries(config['gus_epaxos_control_src_directory'])
     make_repo_binaries(config['gryff_control_src_directory'])
 
 
