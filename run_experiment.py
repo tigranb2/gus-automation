@@ -198,7 +198,7 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
         servers_started += 1
 
     # I assume there is no way we can detect when the servers are initialized.
-    time.sleep(5)
+    time.sleep(10)
     return server_threads
 
 
