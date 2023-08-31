@@ -13,8 +13,8 @@ from utils.git_util import *
 
 
 def setup_nodes(config, executor, results_extension):
-    switch_branches(config)
-    make_binaries(config)
+    # switch_branches(config)
+    # make_binaries(config)
     timestamp = prepare_control_exp_directory(config, results_extension)
 
     temp = results_extension
@@ -22,7 +22,7 @@ def setup_nodes(config, executor, results_extension):
         temp = timestamp
     prepare_remote_exp_and_bin_directories(config, temp, executor)
     
-    # copy_binaries_to_machines(config, executor)
+    copy_binaries_to_machines(config, executor)
     if config['layered']:
         copy_redis_binaries_to_machines(config, executor)
 
