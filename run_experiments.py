@@ -78,7 +78,7 @@ def run():
         #     protocols = ["gus", "giza"]
         #
         # Fig 6 is only Pineapple and Gryff
-        if "fig6" in config_path:
+        if "fig6" or "RMWFig6" in config_path:
             protocols = ["gryff", "pineapple"]
 
         print("Config path = ", config_path)
