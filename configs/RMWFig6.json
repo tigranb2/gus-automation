@@ -64,7 +64,7 @@
     "replication_protocol": "gus",
     "number_of_replicas": 5,
     "durable": false,
-    "experiment_length": 30,
+    "experiment_length": 180,
     "rmw_percentage": 0.1,
     "write_percentage": 0.45,
     "conflict_percentage": 30,
