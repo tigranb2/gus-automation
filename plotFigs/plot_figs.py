@@ -197,7 +197,7 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
         read_latencies[protocol] = r_latencies
 
         # Create dictionary of RMW latencies
-        if rmw and protocol not "pqr":
+        if rmw and protocol != "pqr":
             m_latencies = extract_norm_latencies(folder, is_for_reads=False, rmw=True)
             rmw_latencies[protocol] = m_latencies
 
