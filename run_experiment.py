@@ -196,7 +196,7 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
         server_threads.append(run_remote_command_async(server_command, server_url))
 
         servers_started += 1
-        time.sleep(3)
+        time.sleep(5)
     return server_threads
 
 
