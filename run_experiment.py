@@ -162,7 +162,7 @@ def run_standard_experiment(server_names_to_internal_ips, config, timestamp, exe
 def kill_machines(config, executor):
     futures = []
 
-    master_url = get_machine_url(config, config['server_names'][0])
+    master_url = get_machine_url(config, "client")
     futures.append(executor.submit(run_remote_command_sync('killall -9 master', master_url)))
 
     for server_name in config['server_names']:
