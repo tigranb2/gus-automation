@@ -78,8 +78,6 @@ def run():
         #     protocols = ["gus", "giza"]
         #
         # Fig 6 is only Pineapple and Gryff
-        if "fig6" or "RMWFig6" in config_path:
-            protocols = ["gryff", "pineapple"]
 
         print("Config path = ", config_path)
 
@@ -96,6 +94,8 @@ def run():
             # NOT SURE WHY - Gryff not working 
             # For fig 6  (old fig 9 thought it was fig8, then fig7), for each protocol, change throughput
             if "fig6" in trimmed_fig:
+                if protocol == "pqr":
+                    continue
                 write_percentages = [.1, .3, .5, .7, .9]
                 for wr in write_percentages:
 
@@ -107,6 +107,8 @@ def run():
                     setup_network_delay(config_path)
                     run_experiment(results_extension_fig6, config_path)
             elif "RMWFig6.json" in config_path:
+                if protocol == "pqr":
+                    continue
                 rmw_percentages = [.1, .3, .5, .7, .9]
                 for rmw in rmw_percentages:
                     update(config_path, "rmw_percentage", rmw)
