@@ -187,9 +187,18 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
 
     servers_started = 0
 
+    # start california as leader
+    server_url = get_machine_url(config, "california")
+    server_command = get_server_cmd(config, timestamp, server_names_to_internal_ips, "california")
+    server_threads.append(run_remote_command_async(server_command, server_url))
+    servers_started += 1
+    time.sleep(10)
+
     for server_name in config['server_names']:
         if servers_started >= config['number_of_replicas']:
             break
+        if server_name == "california":
+            continue
 
         server_url = get_machine_url(config, server_name)
         server_command = get_server_cmd(config, timestamp, server_names_to_internal_ips, server_name)
@@ -197,8 +206,6 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
 
         servers_started += 1
 
-        if server_name == "california":
-            time.sleep(10)
 
     time.sleep(5)
     return server_threads
