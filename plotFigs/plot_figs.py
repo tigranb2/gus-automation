@@ -244,11 +244,11 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
     # should give a dictionary of p100 throughputs (I think this is "maximum attainable througput" as referenced in the NSDI23_GUS paper) with PROTOCOL-WP as key (outer key of fig6)
     if figure_name == "rmw6":
         raw_throughputs = \
-            json.loads(check_cmd_output("python3 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
+            json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
             "RMWFig6"]
     else:
         raw_throughputs = \
-            json.loads(check_cmd_output("python3 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
+            json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
             "fig" + figure_name]
 
     # 2D dictionary indexed like: throughputs[PROTOCOL][WRITE_PERCENTAGE]
