@@ -196,9 +196,7 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
         server_threads.append(run_remote_command_async(server_command, server_url))
 
         servers_started += 1
-
-    # I assume there is no way we can detect when the servers are initialized.
-    time.sleep(10)
+        time.sleep(2)
     return server_threads
 
 
