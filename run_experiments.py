@@ -107,8 +107,6 @@ def run():
                     setup_network_delay(config_path)
                     run_experiment(results_extension_fig6, config_path)
             elif "RMWFig6.json" in config_path:
-                if protocol == "pqr":
-                    continue
                 rmw_percentages = [.1, .3, .5, .7, .9]
                 for rmw in rmw_percentages:
                     update(config_path, "rmw_percentage", rmw)
