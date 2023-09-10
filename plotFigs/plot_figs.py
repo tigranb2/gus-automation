@@ -255,7 +255,6 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
     throughputs = {}
 
     for protocol_wp, tput in raw_throughputs.items():
-        print(raw_throughputs)
         temp = protocol_wp.split("-")
         protocol = temp[0]
         wp = temp[1]

@@ -221,6 +221,7 @@ def metrics_table(metrics):
 
 # Deals with printing and saving to files
 def output_metrics(options, metrics):
+    print(metrics)
     if "table" in options or "txt" in options:
         table = metrics_table(metrics)
 
