@@ -124,6 +124,7 @@ def build_results_data(options):
             protocols = os.listdir(path)
 
             for protocol in protocols:
+                print(protocol)
                 results_data[fig][protocol] = {}
 
                 # for Fig8 protocol is really "PROTOCOL-WRITE_PERCENTAGE"
