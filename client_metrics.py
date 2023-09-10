@@ -124,7 +124,6 @@ def build_results_data(options):
             protocols = os.listdir(path)
 
             for protocol in protocols:
-                print(protocol)
                 results_data[fig][protocol] = {}
 
                 # for Fig8 protocol is really "PROTOCOL-WRITE_PERCENTAGE"
@@ -194,6 +193,7 @@ def results_data_to_metrics(options, results_data):
                     total_protocol_data = np.concatenate([total_protocol_data, file_contents])
 
             if "pineapple" in protocol or "pqr" in protocol:
+                print("this one ", protocol)
                 metrics[fig][protocol]["tput"] = {}
                 for file_key, _ in protocol_val.copy().items():
                     if "tput" in file_key:
