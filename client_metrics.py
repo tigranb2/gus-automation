@@ -221,7 +221,6 @@ def metrics_table(metrics):
 
 # Deals with printing and saving to files
 def output_metrics(options, metrics):
-    print("these", metrics)
     if "table" in options or "txt" in options:
         table = metrics_table(metrics)
 
@@ -243,6 +242,7 @@ def output_metrics(options, metrics):
 
 
 def output_max_tput_only(metrics):
+    print("these metrics ; ", metrics)
     trimmed_metrics = {}
     for fig, fig_val in metrics.items():
         trimmed_metrics[fig] = {}
