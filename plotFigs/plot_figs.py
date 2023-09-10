@@ -251,7 +251,7 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
             json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
             "fig" + figure_name]
 
-    print(raw_throughputs)
+    print('he ', raw_throughputs)
     # 2D dictionary indexed like: throughputs[PROTOCOL][WRITE_PERCENTAGE]
     throughputs = {}
 
