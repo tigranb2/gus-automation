@@ -250,7 +250,6 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
             json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
             "fig" + figure_name]
 
-    print('he ', raw_throughputs)
     # 2D dictionary indexed like: throughputs[PROTOCOL][WRITE_PERCENTAGE]
     throughputs = {}
 
@@ -271,7 +270,7 @@ def check_cmd_output(cmd):
     # output = subprocess.check_output(cmd)
     ps = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = ps.communicate()[0]
-    return output.decode("utf-8").strip("\n")
+    return output.decode("utf-8")
 
 
 # returns newest results. Assumes results are in ../results
