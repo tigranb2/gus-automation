@@ -20,6 +20,7 @@ metrics_dir = "metrics"
 def get_metrics(options):
     results_data = build_results_data(options)
     metrics = results_data_to_metrics(options, results_data)
+    print(metrics)
     if "onlytputs" in options:
         output_max_tput_only(metrics)
     else:
