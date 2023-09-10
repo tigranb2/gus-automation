@@ -269,7 +269,6 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
 def check_cmd_output(cmd):
     # output = subprocess.check_output(cmd)
     ps = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    print(ps)
     output = ps.communicate()[0]
     return output.decode("utf-8").strip("\n")
 
