@@ -246,7 +246,6 @@ def output_max_tput_only(metrics):
     for fig, fig_val in metrics.items():
         trimmed_metrics[fig] = {}
         for protocol, protocol_val in fig_val.items():
-            print(protocol)
             trimmed_metrics[fig][protocol] = metrics[fig][protocol]["tput"]["p50.0"]
 
     print(json.dumps(trimmed_metrics))
