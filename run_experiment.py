@@ -192,7 +192,7 @@ def start_servers(config, timestamp, server_names_to_internal_ips):
     server_command = get_server_cmd(config, timestamp, server_names_to_internal_ips, "california")
     server_threads.append(run_remote_command_async(server_command, server_url))
     servers_started += 1
-    time.sleep(10)
+    time.sleep(5)
 
     for server_name in config['server_names']:
         if servers_started >= config['number_of_replicas']:
@@ -223,6 +223,9 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
         for server_name in config['server_names']:
             if clients_started >= config['number_of_replicas']:
                 break
+
+            if server_name == "virginia":
+                time.Sleep(1)
 
             server_url = get_machine_url(config, server_name)
             client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, clients_started)
