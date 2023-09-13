@@ -231,7 +231,7 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
             clients_started += 1
 
             if server_name == "virginia":
-                time.Sleep(1)
+                time.sleep(1)
         return client_threads
 
 
