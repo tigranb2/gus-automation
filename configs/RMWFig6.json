@@ -1,53 +1,120 @@
 {
-    "exp_name":"throughput_vs_write_ratio",
     "server_names": [
         "california",
         "virginia",
         "ireland",
         "oregon",
-        "japan"
+        "japan",
+        "bahrain",
+        "london",
+        "paris",
+        "central"
     ],
     "root_user": "root",
     "cloudlab_user": "dumasca",
-    "experiment_name": "test",
+    "experiment_name": "throughput_vs_write_ratio",
     "project_name": "HyflowTM-PG0",
     "host_format_str": "%s.%s.%s.utah.cloudlab.us",
     "emulate_wan_latency": true,
     "server_ping_latencies": {
-        "california": {
-            "california": 0,
-            "ireland": 151,
-            "japan": 113,
-            "oregon": 59,
-            "virginia": 72
-        },
-        "ireland": {
-            "california": 151,
-            "ireland": 0,
-            "japan": 220,
+        "london": {
+            "london": 0,
+            "paris": 7,
+            "california": 136,
             "oregon": 145,
-            "virginia": 88
+            "japan": 209,
+            "central": 88,
+            "bahrain": 122,
+            "virginia": 76,
+            "ireland": 10
         },
-        "japan": {
-            "california": 113,
-            "ireland": 220,
-            "japan": 0,
-            "oregon": 121,
-            "virginia": 162
+        "paris": {
+            "london": 7,
+            "paris": 0,
+            "california": 137,
+            "oregon": 150,
+            "japan": 243,
+            "central": 92,
+            "bahrain": 116,
+            "virginia": 78,
+            "ireland": 16
+        },
+        "california": {
+            "london": 136,
+            "paris": 137,
+            "california": 0,
+            "oregon": 59,
+            "japan": 113,
+            "central": 78,
+            "bahrain": 252,
+            "virginia": 72,
+            "ireland": 151
         },
         "oregon": {
+            "london": 145,
+            "paris": 150,
             "california": 59,
-            "ireland": 145,
-            "japan": 121,
             "oregon": 0,
-            "virginia": 93
+            "japan": 121,
+            "central": 65,
+            "bahrain": 259,
+            "virginia": 93,
+            "ireland": 145
+        },
+        "japan": {
+            "london": 209,
+            "paris": 243,
+            "california": 113,
+            "oregon": 121,
+            "japan": 0,
+            "central": 154,
+            "bahrain": 170,
+            "virginia": 162,
+            "ireland": 220
+        },
+        "central": {
+            "london": 88,
+            "paris": 92,
+            "california": 78,
+            "oregon": 65,
+            "japan": 154,
+            "central": 0,
+            "bahrain": 207,
+            "virginia": 15,
+            "ireland": 72
+        },
+        "bahrain": {
+            "london": 122,
+            "paris": 116,
+            "california": 252,
+            "oregon": 259,
+            "japan": 170,
+            "central": 207,
+            "bahrain": 0,
+            "virginia": 193,
+            "ireland": 131
         },
         "virginia": {
+            "london": 76,
+            "paris": 78,
             "california": 72,
-            "ireland": 88,
-            "japan": 162,
             "oregon": 93,
-            "virginia": 0
+            "japan": 162,
+            "central": 15,
+            "bahrain": 193,
+            "virginia": 0,
+            "ireland": 88
+        },
+        "ireland": {
+            "london": 10,
+            "paris": 16,
+            "california": 151,
+            "oregon": 145,
+            "japan": 220,
+            "central": 72,
+            "bahrain": 131,
+            "virginia": 88,
+            "ireland": 0
         }
     },
     "max_bandwidth": "1gibps",
