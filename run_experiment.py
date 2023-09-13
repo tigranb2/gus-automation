@@ -224,14 +224,14 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
             if clients_started >= config['number_of_replicas']:
                 break
 
-            if server_name == "virginia":
-                time.Sleep(1)
-
             server_url = get_machine_url(config, server_name)
             client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, clients_started)
             client_threads.append(run_remote_command_async(client_command, server_url))
 
             clients_started += 1
+
+            if server_name == "virginia":
+                time.Sleep(1)
         return client_threads
 
 
