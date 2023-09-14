@@ -229,9 +229,6 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
             client_threads.append(run_remote_command_async(client_command, server_url))
 
             clients_started += 1
-
-            if server_name == "ireland":
-                time.sleep(3)
         return client_threads
 
 
