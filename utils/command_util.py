@@ -111,7 +111,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
 
     server_addr = server_names_to_ips[config['server_names'][server_id]]
 
-    if config['replication_protocol'] == "gryff":
+    if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "epaxos":
         client_command = ' '.join([str(x) for x in [
             path_to_client_bin,
             '-maddr=%s' % "10.10.1.1",
