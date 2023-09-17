@@ -142,7 +142,8 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     if config['replication_protocol'] == "gryff":
         client_command += ' -proxy -rCount=%d' % config["number_of_replicas"]
 
-    if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "pineapple" or config['replication_protocol'] == "pqr":
+    if (config['replication_protocol'] == "gryff" or config['replication_protocol'] == "pineapple"
+            or config['replication_protocol'] == "pqr" or config['replication_protocol'] == "epaxos"):
         client_command += ' -rmws=%f' % config["rmw_percentage"]
 
     if config['replication_protocol'] == "pineapple":
