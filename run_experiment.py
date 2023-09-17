@@ -143,7 +143,7 @@ def run_standard_experiment(server_names_to_internal_ips, config, timestamp, exe
     server_threads = start_servers(config, timestamp, server_names_to_internal_ips)
     client_threads = start_clients(config, timestamp, server_names_to_internal_ips)
 
-    if config['replication_protocol'] == "gryff":
+    if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "epaxos":
         print('waiting for client to finish')
         client_threads.wait()
     else:
@@ -215,7 +215,7 @@ def start_clients(config, timestamp, server_names_to_internal_ips):
     client_threads = []
 
     clients_started = 0
-    if config['replication_protocol'] == "gryff":
+    if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "epaxos":
         client_url = get_machine_url(config, 'client')
         client_command = get_client_cmd(config, timestamp, server_names_to_internal_ips, clients_started)
         return run_remote_command_async(client_command, client_url)

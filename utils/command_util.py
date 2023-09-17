@@ -119,6 +119,15 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
             '-c=%d' % config['conflict_percentage'],
             '-T=%d' % int(config['clients_per_replica'] * config['number_of_replicas'])
         ]])
+    elif config['replication_protocol'] == "epaxos":
+        client_command = ' '.join([str(x) for x in [
+            path_to_client_bin,
+            '-saddr=%s' % server_addr,
+            '-serverID=%d' % server_id,
+            '-writes=%f' % config['write_percentage'],
+            '-c=%d' % config['conflict_percentage'],
+            '-T=%d' % int(config['clients_per_replica'] * config['number_of_replicas'])
+        ]])
     else:
         client_command = ' '.join([str(x) for x in [
             path_to_client_bin,
@@ -134,6 +143,9 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
 
     if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "pineapple" or config['replication_protocol'] == "pqr":
         client_command += ' -rmws=%f' % config["rmw_percentage"]
+
+    if config['replication_protocol'] == "pineapple":
+        client_command += " -tailAtScale=60"
 
         # Only run client for specified length.
     timeout = "%d" % config["experiment_length"]
