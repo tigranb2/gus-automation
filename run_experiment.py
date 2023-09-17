@@ -244,13 +244,13 @@ def collect_exp_data(config, timestamp, executor):
                                                 os.path.join(control_exp_directory, 'server-%s' % server_name),
                                                 server_url, remote_exp_directory))
 
-        if config['replication_protocol'] != "gryff":
+        if config['replication_protocol'] != "gryff" or config['replication_protocol'] != "epaxos":
             # get client data
             download_futures.append(
                 executor.submit(copy_remote_directory_to_local, os.path.join(control_exp_directory, 'client'), server_url,
                                 remote_exp_directory))
 
-    if config['replication_protocol'] == "gryff":
+    if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "epaxos":
         client_url = get_machine_url(config, 'client')
         path_to_client_data = os.path.join(control_exp_directory, 'client')
         download_futures.append(

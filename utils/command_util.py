@@ -124,6 +124,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
             path_to_client_bin,
             '-saddr=%s' % server_addr,
             '-serverID=%d' % server_id,
+            '-serverCount=%d' % config['number_of_replicas'],
             '-writes=%f' % config['write_percentage'],
             '-c=%d' % config['conflict_percentage'],
             '-T=%d' % int(config['clients_per_replica'] * config['number_of_replicas'])
