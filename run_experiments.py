@@ -118,6 +118,15 @@ def run():
 
                     setup_network_delay(config_path)
                     run_experiment(results_extension_RMWfig6, config_path)
+            elif "gryffFig11.json" in config_path:
+                tas_values = [1, 15, 30, 45, 60, 75, 90, 105]
+                for tas in tas_values:
+                    update(config_path, "tail_at_scale", tas)
+
+                    results_extension_gryffFig11 = Path(str(results_extension) + "-" + (str(tas)))
+
+                    setup_network_delay(config_path)
+                    run_experiment(results_extension_gryffFig11, config_path)
             # This is the Cloudlab experiment that should really be run with 3 and 5 replicas
             elif "fig8n5.json" in config_path:
 
