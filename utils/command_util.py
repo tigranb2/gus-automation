@@ -147,7 +147,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
         client_command += ' -rmws=%f' % config["rmw_percentage"]
 
     if config['replication_protocol'] == "pineapple":
-        client_command += " -tailAtScale=60"
+        client_command += " -tailAtScale=%d" % config["tail_at_scale"]
 
         # Only run client for specified length.
     timeout = "%d" % config["experiment_length"]
