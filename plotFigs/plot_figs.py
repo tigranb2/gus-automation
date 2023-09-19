@@ -1,7 +1,7 @@
 from folder_to_norm_latencies import extract_norm_latencies
 from extract_latencies import extract_latencies
 from latencies_to_csv import latencies_to_csv
-from csvs_to_plot import cdf_csvs_to_plot, tput_wp_plot
+from csvs_to_plot import cdf_csvs_to_plot, tput_wp_plot, max_tas_plot
 import os
 from pathlib import Path
 import sys
@@ -78,15 +78,15 @@ def main(results_path):
         elif fig == "gryffFig8":
             print("Plotting gryffFig8...")
             plot_gryffFig8(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
+                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
         elif fig == "gryffFig9":
             print("Plotting gryffFig9...")
             plot_gryffFig9(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
-                      latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
+                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
         elif fig == "gryffFig11":
             print("Plotting gryffFig11...")
             plot_gryffFig11(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
-                           latencies_folder_paths["pineapple"])
+                            latencies_folder_paths["pineapple"])
         elif fig == "RMWFig6":
             print("Plotting RMWFig6...")
             plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths)
@@ -95,7 +95,8 @@ def main(results_path):
             print("Default reached, Plotting Case not found")
 
 
-def plot_fig5(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
+def plot_fig5(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
+              pqr_latency_folder):
     # gryff_fig_csvs, gus_fig_csvs, epaxos_fig_csvs = calculate_fig_5_csvs(csv_target_directory, gryff_latency_folder, gus_latency_folder, epaxos_latency_folder)
     read_csvs, write_csvs, _, _ = calculate_csvs_cdf("5", csv_target_directory, gryff_latency_folder,
                                                      pineapple_latency_folder, pqr_latency_folder)
@@ -107,7 +108,8 @@ def plot_fig5(plot_target_directory, csv_target_directory, gryff_latency_folder,
     cdf_csvs_to_plot(plot_target_directory, "5" + "-write", write_csvs, is_for_reads=False)
 
 
-def plot_fig4(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
+def plot_fig4(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder,
+              pqr_latency_folder):
     read_csvs, write_csvs, _, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,
                                                      pineapple_latency_folder, pqr_latency_folder)
 
@@ -132,6 +134,7 @@ def plot_fig6(plot_target_directory, results_path, csv_target_directory, latenci
     throughputs = calculate_tput_wp("6", results_path, csv_target_directory, latencies_folder_paths)
     tput_wp_plot(plot_target_directory, "6", throughputs)
 
+
 def plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
     # For fig6, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/....
     # latencies_folder_paths = TIMESTAMP/FIG6/PROTOCOL/
@@ -140,17 +143,24 @@ def plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, late
     throughputs = calculate_tput_wp("rmw6", results_path, csv_target_directory, latencies_folder_paths)
     tput_wp_plot(plot_target_directory, "rmw6", throughputs, rmw=True)
 
-def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
-    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder,
-                                                                  pineapple_latency_folder, pqr_latency_folder, rmw=True)
+
+def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder,
+                   pineapple_latency_folder, pqr_latency_folder):
+    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory,
+                                                                  gryff_latency_folder,
+                                                                  pineapple_latency_folder, pqr_latency_folder,
+                                                                  rmw=True)
 
     cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
-def plot_gryffFig8(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
+
+def plot_gryffFig8(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
+                   pqr_latency_folder):
     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff8", csv_target_directory, gryff_latency_folder,
-                                                                  pineapple_latency_folder, pqr_latency_folder, rmw=True)
+                                                                  pineapple_latency_folder, pqr_latency_folder,
+                                                                  rmw=True)
 
     # Reads
     cdf_csvs_to_plot(plot_target_directory, "gryff8", read_csvs, is_for_reads=True)
@@ -162,9 +172,11 @@ def plot_gryffFig8(plot_target_directory, csv_target_directory, gryff_latency_fo
     cdf_csvs_to_plot(plot_target_directory, "gryff8" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
 
-def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder):
+def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
+                   pqr_latency_folder):
     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff9", csv_target_directory, gryff_latency_folder,
-                                                                  pineapple_latency_folder, pqr_latency_folder, rmw=True)
+                                                                  pineapple_latency_folder, pqr_latency_folder,
+                                                                  rmw=True)
 
     # Reads
     cdf_csvs_to_plot(plot_target_directory, "gryff9", read_csvs, is_for_reads=True)
@@ -175,23 +187,16 @@ def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_fo
     # RMWs
     cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
-def plot_gryffFig11(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder):
-    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff9", csv_target_directory, gryff_latency_folder,
-                                                                  pineapple_latency_folder, rmw=True)
 
-    # Reads
-    cdf_csvs_to_plot(plot_target_directory, "gryff9", read_csvs, is_for_reads=True)
-
-    # Writes
-    cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-write", write_csvs, is_for_reads=False)
-
-    # RMWs
-    cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
+def plot_gryffFig11(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
+    max_lats = calculate_lat_tas("gryff11", results_path, csv_target_directory, latencies_folder_paths)
+    max_tas_plot(plot_target_directory, "gryff11", max_lats)
 
 
 # Returns a tuple of tuple of csv paths.
 # This is used for figs 4 , 5 and 9
-def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, pqr_latency_folder, rmw=False):
+def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, pineapple_latency_folder, \
+                       pqr_latency_folder, rmw=False):
     print("quick print")
     protocols = ["gryff", "pineapple", "pqr"]
     folders = {"gryff": gryff_latency_folder, "pineapple": pineapple_latency_folder, "pqr": pqr_latency_folder}
@@ -202,7 +207,7 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
 
     write_log_latencies = {}
     read_log_latencies = {}
-    rmw_log_latencies ={}
+    rmw_log_latencies = {}
 
     for protocol, folder in folders.items():
         # Create dictionary of write latencies (one key-value pair per protocol)
@@ -229,7 +234,7 @@ def calculate_csvs_cdf(figure_name, csv_target_directory, gryff_latency_folder, 
     write_log_csvs = {}
     rmw_log_csvs = {}
 
-    # read 
+    # read
     for protocol, latency in read_latencies.items():
         norm_cdf_csv, norm_log_cdf_csv = latencies_to_csv(csv_target_directory, latency, protocol, figure_name)
         read_csvs[protocol] = norm_cdf_csv
@@ -261,11 +266,12 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
     # should give a dictionary of p100 throughputs (I think this is "maximum attainable througput" as referenced in the NSDI23_GUS paper) with PROTOCOL-WP as key (outer key of fig6)
     if figure_name == "rmw6":
         raw_throughputs = \
-            json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))["RMWFig6"]
+            json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
+                "RMWFig6"]
     else:
         raw_throughputs = \
             json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlytputs --path=" + results_path))[
-            "fig" + figure_name]
+                "fig" + figure_name]
 
     # 2D dictionary indexed like: throughputs[PROTOCOL][WRITE_PERCENTAGE]
     throughputs = {}
@@ -281,6 +287,29 @@ def calculate_tput_wp(figure_name, results_path, csv_target_directory, latencies
                                           axis=0)  # throughputs[protocl] is a 2D numpy array with the strucutre [write-percentage, tput] on each row
 
     return throughputs
+
+# # calculates latency vs tail at scale (fig11)
+def calculate_lat_tas(figure_name, results_path, csv_target_directory, latencies_folder_paths):
+    # ex: gryff_latency_dict contains subfolders with tail at scale values
+    # should give a dictionary of p50 latencies
+    raw_latencies = \
+        json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlymax --path=" + results_path))[
+            "fig" + figure_name]
+
+    # 2D dictionary indexed like: throughputs[PROTOCOL][TAIL_AT_SCALE]
+    latencies = {}
+
+    for protocol_tas, lat in raw_latencies.items():
+        temp = protocol_tas.split("-")
+        protocol = temp[0]
+        tas = temp[1]
+
+        if protocol not in latencies:
+            latencies[protocol] = np.empty([0, 2], dtype=float)
+        latencies[protocol] = np.append(latencies[protocol], [[float(tas), float(lat)]],
+                                          axis=0)
+
+    return latencies
 
 
 # Delete and fix packaging

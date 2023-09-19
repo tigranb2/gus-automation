@@ -19,11 +19,15 @@ metrics_dir = "metrics"
 
 def get_metrics(options):
     results_data = build_results_data(options)
-    metrics = results_data_to_metrics(options, results_data)
-    if "onlytputs" in options:
-        output_max_tput_only(metrics)
+    if "onlymax" in options:
+        metrics = max_results_data_to_metrics(options, results_data)
+        output_max_only(metrics)
     else:
-        output_metrics(options, metrics)
+        metrics = results_data_to_metrics(options, results_data)
+        if "onlytputs" in options:
+            output_max_tput_only(metrics)
+        else:
+            output_metrics(options, metrics)
 
 
 # returns dictionary of options (with values) interpreted from input args
@@ -131,7 +135,10 @@ def build_results_data(options):
 
                 files = os.listdir(dir_path)
                 for f in files:
-                    extract_file_data(fig, protocol, f, dir_path, results_data)
+                    if "onlymax" in options:
+                        extract_max_file_data(fig, protocol, f, dir_path, results_data)
+                    else:
+                        extract_file_data(fig, protocol, f, dir_path, results_data)
 
     return results_data
 
@@ -148,6 +155,21 @@ def extract_file_data(fig, protocol, f, dir_path, results_data):
         elif "tput" in file_key:
             results_data[fig][protocol][file_key] = file_contents[:, 2]
         else:  # Reads or Writes
+            results_data[fig][protocol][file_key] = file_contents[:, 1]
+
+
+def extract_max_file_data(fig, protocol, f, dir_path, results_data):
+    ignore = ["stderr", "stdout"]  # Files to ignore
+    if not any(file in f for file in ignore):
+        file_path = dir_path + "/" + f
+        file_key = get_file_key(f, file_path, protocol)
+
+        file_contents = np.loadtxt(file_path, dtype=float)
+        if file_contents.ndim == 1:  # read empty RMW file
+            return
+        elif "max" in file_key:
+            results_data[fig][protocol][file_key] = file_contents[:, 2]
+        else:  # Reads or Writes or tput
             results_data[fig][protocol][file_key] = file_contents[:, 1]
 
 
@@ -206,6 +228,34 @@ def results_data_to_metrics(options, results_data):
     return metrics
 
 
+def max_results_data_to_metrics(options, results_data):
+    metrics = results_data.copy()
+
+    # Traverse each item in the original 3D dictionary (results_data)
+    for fig, fig_val in results_data.items():
+        for protocol, protocol_val in fig_val.items():
+            total_protocol_data = np.array([])
+
+            for file_key, file_contents in protocol_val.items():  # file_contents here is trimmed down compared to the file_contents in extract_file_data()
+                metrics[fig][protocol][file_key] = get_stats(options, file_contents)  # percentiles and mean
+
+                if "max" not in file_key:  # add all Reads and Writes to total_protocol_data
+                    total_protocol_data = np.concatenate([total_protocol_data, file_contents])
+
+            if "pineapple" in protocol or "pqr" in protocol:
+                metrics[fig][protocol]["max"] = {}
+                for file_key, _ in protocol_val.copy().items():
+                    if "max" in file_key:
+                        if file_key == "max":
+                            continue
+                        metrics[fig][protocol]["max"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["max"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
+                        del metrics[fig][protocol][file_key]
+
+            metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
+
+    return metrics
+
+
 def metrics_table(metrics):
     table = PrettyTable()
     table.field_names = ["Fig", "Protocol", "File", "Metric", "Value"]
@@ -251,6 +301,14 @@ def output_max_tput_only(metrics):
     print(json.dumps(trimmed_metrics))
 
 
+def output_max_only(metrics):
+    trimmed_metrics = {}
+    for fig, fig_val in metrics.items():
+        trimmed_metrics[fig] = {}
+        for protocol, protocol_val in fig_val.items():
+            trimmed_metrics[fig][protocol] = metrics[fig][protocol]["max"]["p50.0"]
+
+    print(json.dumps(trimmed_metrics))
 # Utility / Small Helpers
 
 def clear_metrics_dir():

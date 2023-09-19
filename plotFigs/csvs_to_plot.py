@@ -24,7 +24,7 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
     # Each data object is a np array. 1st column is x data (latency), 2nd column is y data (percentile). label is the protocol
     # Creates data dictionary from csvs dictionary. Exclude anything beyond first two columns
     data = {protocol: np.genfromtxt(csv, delimiter=',', usecols=np.arange(0,2)) for protocol, csv in csvs.items()}
-    
+
     fig, ax = plt.subplots()
 
     # sizing and margins
@@ -36,7 +36,7 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
     # d is data (singular)
     for protocol, d in data.items():
         print("d = ", d)
-        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol]) 
+        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol])
 
     # Setting scale for y axis
     if log == True:
@@ -52,7 +52,7 @@ def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=Fals
         ax.set_ylabel('Fraction of RMW')
     else:
         ax.set_ylabel('Fraction of Writes')
-    
+
     ax.legend()
 
     fig.savefig(plot_target_directory / Path(figure + ".png") , bbox_inches="tight")
@@ -81,6 +81,32 @@ def tput_wp_plot(plot_target_directory, figure, throughputs, rmw=False):
     else:
         ax.set_xlabel("Write Percentage")
     ax.set_ylabel("Throughput (ops/s)")
+    ax.set_ylim(bottom=0)
+
+    ax.legend()
+
+    fig.savefig(plot_target_directory / Path(figure + ".png") , bbox_inches="tight")
+
+
+# Used for figure 6 - new version of plotting with matplotlib
+# throughputs is a dictionary indexed via: thoughputs[protocol][wp]
+def max_tas_plot(plot_target_directory, figure, max_lats):
+    fig, ax = plt.subplots()
+
+    # sizing and margins
+    fig.set_figheight(1.5)
+    fig.set_figwidth(6)
+    ax.margins(x=0.01)
+
+    print("max latencies = ", max_lats)
+
+    # d is data
+    for protocol, d  in max_lats.items():
+        d = d[d[:,0].argsort()]  # sort the data before plotting
+        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol])
+
+    ax.set_xlabel("# of subrequests")
+    ax.set_ylabel("p50 Latency (ms)")
     ax.set_ylim(bottom=0)
 
     ax.legend()
