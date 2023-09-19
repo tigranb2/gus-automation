@@ -41,7 +41,7 @@
     "replication_protocol": "gus",
     "number_of_replicas": 3,
     "durable": true,
-    "tail_at_scale": 1,
+    "tail_at_scale": -1,
     "experiment_length": 180,
     "rmw_percentage": 0,
     "write_percentage": 0.055,
