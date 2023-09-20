@@ -304,6 +304,7 @@ def output_max_tput_only(metrics):
 
 
 def output_max_only(metrics):
+    print(metrics)
     trimmed_metrics = {}
     for fig, fig_val in metrics.items():
         trimmed_metrics[fig] = {}
