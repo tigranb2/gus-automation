@@ -146,7 +146,7 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
             or config['replication_protocol'] == "pqr" or config['replication_protocol'] == "epaxos"):
         client_command += ' -rmws=%f' % config["rmw_percentage"]
 
-    if config['replication_protocol'] == "pineapple":
+    if config['replication_protocol'] == "pineapple" or config['replication_protocol'] == "gryff":
         client_command += " -tailAtScale=%d" % config["tail_at_scale"]
 
         # Only run client for specified length.
