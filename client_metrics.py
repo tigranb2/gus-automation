@@ -142,17 +142,19 @@ def build_results_data(options):
                     else:
                         extract_file_data(fig, protocol, f, dir_path, results_data)
 
-    metrics = results_data.copy()
-    for fig, fig_val in metrics.items():
-        for protocol, protocol_val in fig_val.items():
-            results_data[fig][protocol]["MAX"] = np.array([])
-            for file_key, file_contents in protocol_val.copy().items():
-                if "MAX" in file_key and file_key != "MAX":
-                    if len(results_data[fig][protocol]["MAX"]) == 0:
-                        results_data[fig][protocol]["MAX"] = file_contents
-                    else:
-                        results_data[fig][protocol]["MAX"] = np.concatenate([results_data[fig][protocol]["MAX"], file_contents])
-                    del results_data[fig][protocol][file_key]
+    if "onlymax" in options:
+        metrics = results_data.copy()
+        for fig, fig_val in metrics.items():
+            for protocol, protocol_val in fig_val.items():
+                results_data[fig][protocol]["MAX"] = np.array([])
+                for file_key, file_contents in protocol_val.copy().items():
+                    if "MAX" in file_key and file_key != "MAX":
+                        if len(results_data[fig][protocol]["MAX"]) == 0:
+                            results_data[fig][protocol]["MAX"] = file_contents
+                        else:
+                            results_data[fig][protocol]["MAX"] = np.concatenate([results_data[fig][protocol]["MAX"], file_contents])
+                        del results_data[fig][protocol][file_key]
+                print(results_data[fig][protocol]["MAX"])
 
     return results_data
 
