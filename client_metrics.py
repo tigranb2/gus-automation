@@ -152,8 +152,8 @@ def build_results_data(options):
                         results_data[fig][protocol]["MAX"] = file_contents
                     else:
                         results_data[fig][protocol]["MAX"] = np.concatenate([results_data[fig][protocol]["MAX"], file_contents])
+                    print("deleting: ", file_key)
                     del results_data[fig][protocol][file_key]
-                    print(results_data[fig][protocol]["MAX"])
 
     return results_data
 
