@@ -292,8 +292,7 @@ def calculate_lat_tas(figure_name, results_path, csv_target_directory, latencies
     # ex: gryff_latency_dict contains subfolders with tail at scale values
     # should give a dictionary of p50 latencies
     raw_latencies = \
-        json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlymax --path=" + results_path))[
-            "fig" + figure_name]
+        json.loads(check_cmd_output("python3.8 ../client_metrics.py 50 --onlymax --path=" + results_path))["gryffFig11"]
 
     # 2D dictionary indexed like: throughputs[PROTOCOL][TAIL_AT_SCALE]
     latencies = {}
