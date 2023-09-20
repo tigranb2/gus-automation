@@ -142,6 +142,15 @@ def build_results_data(options):
                     else:
                         extract_file_data(fig, protocol, f, dir_path, results_data)
 
+    metrics = results_data.copy()
+    for fig, fig_val in metrics.items():
+        for protocol, protocol_val in fig_val.items():
+            results_data[fig][protocol]["MAX"] = np.array([])
+            for file_key, file_contents in protocol_val.items():
+                if "MAX" in file_key:
+                    results_data[fig][protocol]["MAX"] = np.concatenate(results_data[fig][protocol]["MAX"], file_contents)
+                    del results_data[fig][protocol][file_key]
+
     return results_data
 
 
@@ -243,15 +252,6 @@ def max_results_data_to_metrics(options, results_data):
 
                 if "MAX" not in file_key:  # add all Reads and Writes to total_protocol_data
                     total_protocol_data = np.concatenate([total_protocol_data, file_contents])
-
-            if "pineapple" in protocol or "pqr" in protocol:
-                metrics[fig][protocol]["MAX"] = {}
-                for file_key, _ in protocol_val.copy().items():
-                    if "MAX" in file_key:
-                        if file_key == "MAX":
-                            continue
-                        metrics[fig][protocol]["MAX"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["MAX"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
-                        del metrics[fig][protocol][file_key]
 
             metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
 
