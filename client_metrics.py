@@ -250,7 +250,7 @@ def max_results_data_to_metrics(options, results_data):
                     if "MAX" in file_key:
                         if file_key == "MAX":
                             continue
-                        metrics[fig][protocol]["MAX"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["max"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
+                        metrics[fig][protocol]["MAX"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["MAX"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
                         del metrics[fig][protocol][file_key]
 
             metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
