@@ -148,6 +148,8 @@ def build_results_data(options):
             results_data[fig][protocol]["MAX"] = np.array([])
             for file_key, file_contents in protocol_val.items():
                 if "MAX" in file_key:
+                    if len(results_data[fig][protocol]["MAX"]) == 0:
+                        results_data[fig][protocol]["MAX"] = file_contents
                     results_data[fig][protocol]["MAX"] = np.concatenate(results_data[fig][protocol]["MAX"], file_contents)
                     del results_data[fig][protocol][file_key]
 
