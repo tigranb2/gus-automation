@@ -146,7 +146,7 @@ def build_results_data(options):
     for fig, fig_val in metrics.items():
         for protocol, protocol_val in fig_val.items():
             results_data[fig][protocol]["MAX"] = np.array([])
-            for file_key, file_contents in protocol_val.items():
+            for file_key, file_contents in protocol_val.copy().items():
                 if "MAX" in file_key:
                     if len(results_data[fig][protocol]["MAX"]) == 0:
                         results_data[fig][protocol]["MAX"] = file_contents
