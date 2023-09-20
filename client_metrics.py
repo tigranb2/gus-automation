@@ -169,7 +169,7 @@ def extract_max_file_data(fig, protocol, f, dir_path, results_data):
         file_contents = np.loadtxt(file_path, dtype=float)
         if file_contents.ndim == 1:  # read empty RMW file
             return
-        elif "max" in file_key:
+        elif "MAX" in file_key:
             results_data[fig][protocol][file_key] = file_contents[:, 2]
         else:  # Reads or Writes or tput
             results_data[fig][protocol][file_key] = file_contents[:, 1]
@@ -241,16 +241,16 @@ def max_results_data_to_metrics(options, results_data):
             for file_key, file_contents in protocol_val.items():  # file_contents here is trimmed down compared to the file_contents in extract_file_data()
                 metrics[fig][protocol][file_key] = get_stats(options, file_contents)  # percentiles and mean
 
-                if "max" not in file_key:  # add all Reads and Writes to total_protocol_data
+                if "MAX" not in file_key:  # add all Reads and Writes to total_protocol_data
                     total_protocol_data = np.concatenate([total_protocol_data, file_contents])
 
             if "pineapple" in protocol or "pqr" in protocol:
-                metrics[fig][protocol]["max"] = {}
+                metrics[fig][protocol]["MAX"] = {}
                 for file_key, _ in protocol_val.copy().items():
-                    if "max" in file_key:
-                        if file_key == "max":
+                    if "MAX" in file_key:
+                        if file_key == "MAX":
                             continue
-                        metrics[fig][protocol]["max"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["max"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
+                        metrics[fig][protocol]["MAX"] = {k: metrics[fig][protocol][file_key].get(k, 0) + metrics[fig][protocol]["max"].get(k, 0) for k in set(metrics[fig][protocol][file_key])}
                         del metrics[fig][protocol][file_key]
 
             metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
@@ -304,12 +304,11 @@ def output_max_tput_only(metrics):
 
 
 def output_max_only(metrics):
-    print(metrics)
     trimmed_metrics = {}
     for fig, fig_val in metrics.items():
         trimmed_metrics[fig] = {}
         for protocol, protocol_val in fig_val.items():
-            trimmed_metrics[fig][protocol] = metrics[fig][protocol]["max"]["p50.0"]
+            trimmed_metrics[fig][protocol] = metrics[fig][protocol]["MAX"]["p50.0"]
 
     print(json.dumps(trimmed_metrics))
 # Utility / Small Helpers
