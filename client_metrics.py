@@ -60,6 +60,8 @@ def read_input(args):
             options["clear"] = True
         elif arg.startswith("--onlytputs"):
             options["onlytputs"] = True
+        elif arg.startswith("--onlymax"):
+            options["onlymax"] = True
         # figs and protocols are options that form lists
         elif arg.startswith("--fig"):
             options["fig"].append(arg.split("=")[-1])  # error check later to make sure this fig is actually there
