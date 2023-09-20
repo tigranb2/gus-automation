@@ -153,7 +153,7 @@ def build_results_data(options):
                     else:
                         results_data[fig][protocol]["MAX"] = np.concatenate([results_data[fig][protocol]["MAX"], file_contents])
                     del results_data[fig][protocol][file_key]
-                    print(results_data)
+                    print(results_data[fig][protocol]["MAX"])
 
     return results_data
 
