@@ -257,8 +257,6 @@ def max_results_data_to_metrics(options, results_data):
                 if "MAX" not in file_key:  # add all Reads and Writes to total_protocol_data
                     total_protocol_data = np.concatenate([total_protocol_data, file_contents])
 
-            metrics[fig][protocol]["total_protocol_data"] = get_stats(options, total_protocol_data)
-
     return metrics
 
 
