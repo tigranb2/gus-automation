@@ -14,6 +14,7 @@ from matplotlib.ticker import FixedLocator, FuncFormatter
 colors = {"gryff":"green", "pineapple":"orange", "pqr":"blue"}
 linestyles = {"gryff":"dashdot", "pineapple":"solid", "pqr":"dotted"}
 labels = {"gryff":"Gryff", "pineapple":"Pineapple", "pqr":"PQR"} # properly stylized
+markers ={"gryff":"v", "pineapple": "o"}
 
 # New in development version with matplotlib
 def cdf_csvs_to_plot(plot_target_directory, figure, csvs, is_for_reads, rmw=False, log=False):
@@ -103,11 +104,12 @@ def max_tas_plot(plot_target_directory, figure, max_lats):
     # d is data
     for protocol, d  in max_lats.items():
         d = d[d[:,0].argsort()]  # sort the data before plotting
-        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol])
+        ax.plot(d[:,0], d[:,1], color=colors[protocol], linestyle=linestyles[protocol], label=labels[protocol], marker=markers[protocol])
 
     ax.set_xlabel("# of subrequests")
     ax.set_ylabel("p50 Latency (ms)")
     ax.set_ylim(bottom=0)
+    ax.set_ymax(top=150)
 
     ax.legend()
 
