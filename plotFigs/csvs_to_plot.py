@@ -95,7 +95,7 @@ def max_tas_plot(plot_target_directory, figure, max_lats):
     fig, ax = plt.subplots()
 
     # sizing and margins
-    fig.set_figheight(1.0)
+    fig.set_figheight(1.2)
     fig.set_figwidth(6)
     ax.margins(x=0.01)
 
