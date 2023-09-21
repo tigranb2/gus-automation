@@ -109,7 +109,7 @@ def max_tas_plot(plot_target_directory, figure, max_lats):
     ax.set_xlabel("# of subrequests")
     ax.set_ylabel("p50 Latency (ms)")
     ax.set_ylim(bottom=0)
-    ax.set_ymax(top=150)
+    ax.set_ylim(top=150)
 
     ax.legend()
 
