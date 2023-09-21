@@ -97,6 +97,7 @@ def max_tas_plot(plot_target_directory, figure, max_lats):
     # sizing and margins
     fig.set_figheight(1.5)
     fig.set_figwidth(6)
+    fig.xticks([0,15,30,45,60,75,90,105])
     ax.margins(x=0.01)
 
     print("max latencies = ", max_lats)
@@ -112,7 +113,6 @@ def max_tas_plot(plot_target_directory, figure, max_lats):
     ax.set_ylim(top=150)
     ax.set_xlim(left=0)
     ax.set_xlim(right=105)
-    ax.xticks([0,15,30,45,60,75,90,105])
 
     ax.legend()
 
