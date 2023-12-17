@@ -139,17 +139,17 @@ def run_standard_experiment(server_names_to_internal_ips, config, timestamp, exe
     kill_machines(config, executor)
 
     print("starting machines")
-    master_thread = start_master(config, timestamp)
-    server_threads = start_servers(config, timestamp, server_names_to_internal_ips)
+    start_master(config, timestamp)
+    start_servers(config, timestamp, server_names_to_internal_ips)
     client_threads = start_clients(config, timestamp, server_names_to_internal_ips)
 
     if config['replication_protocol'] == "gryff" or config['replication_protocol'] == "epaxos":
         print('waiting for client to finish')
         client_threads.wait()
     else:
+        # for multi-client protocols, wait for all clients to finish
         print('waiting for clients to finish')
         _ = [p.wait() for p in client_threads]
-        # print(exit_codes)
 
     print("killing master and server")
     kill_machines(config, executor)
@@ -177,7 +177,7 @@ def start_master(config, timestamp):
     master_command = get_master_cmd(config, timestamp)
     # The client hosts the master server.
     master_url = get_machine_url(config, "client")
-    time.sleep(5)
+    time.sleep(5)  # wait for master to start
 
     return run_remote_command_async(master_command, master_url)
 

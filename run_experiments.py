@@ -38,9 +38,10 @@ def replace_gryffFig6(config_paths):
 
     for config_path in config_paths:
         if "gryffFig6.json" in config_path:
-            # remove fig4
+            # remove gryffFig6
             config_paths.remove(config_path)
 
+            # replace with gryffFig6a gryffFig6b gryffFig6c
             for x in ["a", "b", "c"]:
                 config_paths.append(parent_path + "gryffFig6" + x + ".json")
 
@@ -71,7 +72,7 @@ def run():
         # adjust user name
         set_config(config_path)
 
-        # default is pineapple and gryff protocols
+        # default is pqr, gryff, and pineapple
         protocols = ["pqr", "gryff", "pineapple"]
         # Figs 8 and 9 plotting is combined gus and giza only
         # if "fig9" in config_path or "fig8" in config_path:
@@ -91,8 +92,7 @@ def run():
 
             results_extension = Path(temp_path) / Path(protocol)
 
-            # NOT SURE WHY - Gryff not working 
-            # For fig 6  (old fig 9 thought it was fig8, then fig7), for each protocol, change throughput
+            # For fig 6; for each protocol, change write percentage
             if "fig6" in trimmed_fig:
                 if protocol == "pqr":
                     continue
@@ -106,6 +106,7 @@ def run():
 
                     setup_network_delay(config_path)
                     run_experiment(results_extension_fig6, config_path)
+            # For RMWFig 6; for each protocol, change RMW percentage
             elif "RMWFig6.json" in config_path:
                 rmw_percentages = [.1, .3, .5, .7, .9]
                 for rmw in rmw_percentages:
@@ -118,6 +119,7 @@ def run():
 
                     setup_network_delay(config_path)
                     run_experiment(results_extension_RMWfig6, config_path)
+            # For gryffFig 11; for each protocol, change tail-at-scale value
             elif "gryffFig11.json" in config_path:
                 tas_values = [1, 15, 30, 45, 60, 75, 90, 105]
                 for tas in tas_values:
