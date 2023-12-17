@@ -34,20 +34,27 @@ It is easiest to run the experiments by used the pre-configured profile on Cloud
 ## How to Run
 ### Setup
 1. Connect to the control machine via ssh.
-> ssh -i <path-to-ssh-key> -p 22 -A <root/userid>@<public dns/ip> 
+``` 
+ssh -i <path-to-ssh-key> -p 22 -A <root/userid>@<public dns/ip>
+```
    - The final address is the address of the **CONTROL** node. 
    - Make sure to include `-A` as an ssh argument
       - This enables port forwarding and allows the control machine to run remote commands over ssh on the other replicas.
 2. Open ``gus-automation`` in the control machine. This repo and others can be found in `/root/go/src`. All repos are stored in root because cloudlab disk images do not save data stored in user home directories.
-> sudo su
->
-> cd ~/go/src/gus-automation
+```
+sudo su
+cd ~/go/src/gus-automation
+```
 
 3. Make sure ``gus-automation`` is up to date.
-> git pull
+```
+git pull
+```
    - If this doesn't work, run ```git reset --hard LATEST_COMMIT``` where LASTEST_COMMIT is the latest commit to the repo on github to update code
 4. Recompile protocol code to ensure it's updated.
-> python3 compile_protocols.py
+```
+python3 compile_protocols.py
+```
 
 ### RMWFig6.json
 For this experiment, use the open-loop client version of the protocols. Visit each protocol's directory and checkout the ``open-loop-client`` branch. Remember to run the ``compile.sh`` in each protocol's directory after each branch change to recompile the protocol binaries. 
@@ -55,20 +62,30 @@ For this experiment, use the open-loop client version of the protocols. Visit ea
 All other experiments are performed on the default branch (``main``).
 ### Running experiment
 1. Go to gus-automation:
-> cd ~/go/src/gus-automation
+```
+cd ~/go/src/gus-automation
+```
 2. If CloudLab experiment has a name other than “test”, set the experiment name with:
-> python3.8 set_experiment_name.py [CLOUDLAB_EXPERIMENT_NAME]
+```
+python3.8 set_experiment_name.py [CLOUDLAB_EXPERIMENT_NAME]
+```
 3. Run an experiment with the following command, filling in the name appropriately
-> python3.8 run_experiments.py [EXPERIMENT_CONFIG_NAME]
+```
+python3.8 run_experiments.py [EXPERIMENT_CONFIG_NAME]
+```
 - The result will be output to a time-stamped folder in ~/go/src/gus-automation/results.
 
 
 ### Plotting
 To plot, you can either move the result folder onto your local machine or continue on Cloudlab.
 1. Go to plotFigs folder
-> cd ~/go/src/gus-automation/plotFigs
+```
+cd ~/go/src/gus-automation/plotFigs
+```
 2. Run the following, which will plot the data in the latest timestamp folder:
-> python3.8 plot_figs.py
+```
+python3.8 plot_figs.py
+```
 - The plots will be in the plots folder
 
 
