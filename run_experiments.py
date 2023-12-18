@@ -72,8 +72,8 @@ def run():
         # adjust user name
         set_config(config_path)
 
-        # default is pqr, gryff, and pineapple
-        protocols = ["pqr", "gryff", "pineapple"]
+        # default is all protocols
+        protocols = ["pqr", "gryff", "pineapple", "epaxos"]
         # Figs 8 and 9 plotting is combined gus and giza only
         # if "fig9" in config_path or "fig8" in config_path:
         #     protocols = ["gus", "giza"]
