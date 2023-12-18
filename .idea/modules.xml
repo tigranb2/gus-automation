@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/gus-automation.iml" filepath="$PROJECT_DIR$/.idea/gus-automation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pineapple-automation.iml" filepath="$PROJECT_DIR$/.idea/pineapple-automation.iml" />
     </modules>
   </component>
 </project>

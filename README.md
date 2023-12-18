@@ -24,7 +24,7 @@ This repo consists of python code that will autonomously run the replication pro
     - See [here](https://riptutorial.com/gnuplot/example/11275/installation-or-setup) to install
 ### Repositories
 - The Pineapple repository: ``https://github.com/tigranb2/pineapple``
-- The Gus and Epaxos repository: ``https://github.com/tigranb2/gus-epaxos``
+- The Gus, Epaxos, and PQR repository: ``https://github.com/tigranb2/gus-epaxos``
     - Note: this implementation only sports non conflicting operations.
 - The Gryff repository: ``https://github.com/tigranb2/gryff-testing``
     - Note: Both ``gryff-testing`` and ``gus-epaxos`` repositories are derived from the EPaxos repository, but have different communication between clients and servers, so it is easier to have two separate repos.
