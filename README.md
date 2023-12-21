@@ -76,6 +76,7 @@ python3.8 set_experiment_name.py [CLOUDLAB_EXPERIMENT_NAME]
 ```
 python3.8 run_experiments.py [EXPERIMENT_CONFIG_NAME]
 ```
+- EXPERIMENT_CONFIG_NAME is the path to the config file of the experiment you would like to run 
 - The result will be output to a time-stamped folder in ~/go/src/gus-automation/results.
 
 
