@@ -53,8 +53,9 @@ git pull
    - If this doesn't work, run ```git reset --hard LATEST_COMMIT``` where LASTEST_COMMIT is the latest commit to the repo on github to update code
 4. Recompile protocol code to ensure it's updated.
 ```
-python3 compile_protocols.py
+. compile.sh
 ```
+- Pass in ``open-loop-client`` as the first argument to compile the open-loop-client versions
 ### gryffFig11.json
 This experiment checks tail-at-scale latency. For pineapple, delete the client binary file and rename clientnew to client. Use gryff and pineapple protocols only.
 
