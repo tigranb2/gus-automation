@@ -31,6 +31,9 @@ def main(results_path):
             latencies_folder_path = fig_path / Path(protocol + "/client")
             latencies_folder_paths[protocol] = latencies_folder_path
 
+        if "epaxos" not in latencies_folder_paths:
+            latencies_folder_paths["epaxos"] = ""
+
         if fig == "fig4a":
             print("Plotting fig4a...")
             plot_fig4(plot_target_directory, csv_target_directory, "4a", latencies_folder_paths["gryff"],
