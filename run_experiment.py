@@ -165,7 +165,7 @@ def kill_machines(config, executor):
     master_url = get_machine_url(config, "client")
     futures.append(executor.submit(run_remote_command_sync('killall -9 master', master_url)))
     if config['replication_protocol'] == "epaxos":
-        futures.append(executor.submit(run_remote_command_sync('killall -9 epaxosclient', master_url)))
+        futures.append(executor.submit(run_remote_command_sync('killall -9 clientepaxos', master_url)))
 
     for server_name in config['server_names']:
         server_url = get_machine_url(config, server_name)
