@@ -105,7 +105,10 @@ def get_client_cmd(config, timestamp, server_names_to_ips, server_id):
     if config['replication_protocol'] == "gryff":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gryff', 'client')
     elif config['replication_protocol'] == "pineapple":
-        path_to_client_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'client')
+        if config["tail_at_scale"] > 1: # use tailAtScale client
+            path_to_client_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'clientnew')
+        else:
+            path_to_client_bin = os.path.join(config['remote_bin_directory'], 'pineapple', 'client')
     elif config['replication_protocol'] == "epaxos":
         path_to_client_bin = os.path.join(config['remote_bin_directory'], 'gus-epaxos', 'clientepaxos')
     else:

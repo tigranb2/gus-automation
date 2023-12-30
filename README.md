@@ -56,8 +56,6 @@ git pull
 . compile.sh
 ```
 - Pass in ``open-loop-client`` as the first argument to compile the open-loop-client versions
-### gryffFig11.json
-This experiment checks tail-at-scale latency. For pineapple, delete the client binary file and rename clientnew to client. Use gryff and pineapple protocols only.
 
 ### RMWFig6.json
 For this experiment, use the open-loop client version of the protocols. Visit each protocol's directory and checkout the ``open-loop-client`` branch. Remember to run the ``compile.sh`` in each protocol's directory after each branch change to recompile the protocol binaries. 
