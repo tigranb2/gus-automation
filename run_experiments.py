@@ -16,37 +16,66 @@ from set_config import set_config
 ####################################################################
 
 # Replaces fig4 with fig4a fig4b fig4c
-def replace_fig4(config_paths):
+# def replace_fig4(config_paths):
+#     last_slash_index = config_paths[0].rfind("/")
+#     parent_path = config_paths[0][:last_slash_index + 1]
+#
+#     for config_path in config_paths:
+#         if "fig4.json" in config_path:
+#             # remove fig4
+#             config_paths.remove(config_path)
+#
+#             # add fig4a fig4b fig4c
+#             for x in ["a", "b", "c"]:
+#                 config_paths.append(parent_path + "fig4" + x + ".json")
+#
+#     return config_paths
+
+
+def replace_fig6(config_paths):
     last_slash_index = config_paths[0].rfind("/")
     parent_path = config_paths[0][:last_slash_index + 1]
 
     for config_path in config_paths:
-        if "fig4.json" in config_path:
-            # remove fig4
+        if "fig6.json" in config_path:
+            # remove fig6
             config_paths.remove(config_path)
 
-            # add fig4a fig4b fig4c
-            for x in ["a", "b", "c"]:
-                config_paths.append(parent_path + "fig4" + x + ".json")
+            # replace with fig6top fig6bottom
+            for x in ["top", "bottom"]:
+                config_paths.append(parent_path + "fig6" + x + ".json")
 
     return config_paths
 
-
-def replace_gryffFig6(config_paths):
+def replace_fig7(config_paths):
     last_slash_index = config_paths[0].rfind("/")
     parent_path = config_paths[0][:last_slash_index + 1]
 
     for config_path in config_paths:
-        if "gryffFig6.json" in config_path:
-            # remove gryffFig6
+        if "fig7.json" in config_path:
+            # remove fig7
             config_paths.remove(config_path)
 
-            # replace with gryffFig6a gryffFig6b gryffFig6c
+            # replace with fig7a fig7b fig7c
             for x in ["a", "b", "c"]:
-                config_paths.append(parent_path + "gryffFig6" + x + ".json")
+                config_paths.append(parent_path + "fig7" + x + ".json")
 
     return config_paths
 
+def replace_fig8(config_paths):
+    last_slash_index = config_paths[0].rfind("/")
+    parent_path = config_paths[0][:last_slash_index + 1]
+
+    for config_path in config_paths:
+        if "fig8.json" in config_path:
+            # remove fig6
+            config_paths.remove(config_path)
+
+            # replace with fig8top fig8bottom
+            for x in ["top", "bottom"]:
+                config_paths.append(parent_path + "fig8" + x + ".json")
+
+    return config_paths
 
 def run():
     now_string = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime())
@@ -61,8 +90,10 @@ def run():
 
     config_paths = sys.argv[1:]
     # Adjusts for fig4
-    config_paths = replace_fig4(config_paths)
-    config_paths = replace_gryffFig6(config_paths)
+    # config_paths = replace_fig4(config_paths)
+    config_paths = replace_fig6(config_paths)
+    config_paths = replace_fig7(config_paths)
+    config_paths = replace_fig8(config_paths)
 
     print("Here are config_paths: ", config_paths)
 
@@ -93,21 +124,21 @@ def run():
             results_extension = Path(temp_path) / Path(protocol)
 
             # For fig 6; for each protocol, change write percentage
-            if "fig6" in trimmed_fig:
-                if protocol == "pqr":
-                    continue
-                write_percentages = [.1, .3, .5, .7, .9]
-                for wr in write_percentages:
-
-                    update(config_path, "write_percentage", wr)
-
-                    # For fig, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/...
-                    results_extension_fig6 = Path(str(results_extension) + "-" + (str(wr)))
-
-                    setup_network_delay(config_path)
-                    run_experiment(results_extension_fig6, config_path)
+            # if "fig6" in trimmed_fig:
+            #     if protocol == "pqr":
+            #         continue
+            #     write_percentages = [.1, .3, .5, .7, .9]
+            #     for wr in write_percentages:
+            #
+            #         update(config_path, "write_percentage", wr)
+            #
+            #         # For fig, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/...
+            #         results_extension_fig6 = Path(str(results_extension) + "-" + (str(wr)))
+            #
+            #         setup_network_delay(config_path)
+            #         run_experiment(results_extension_fig6, config_path)
             # For RMWFig 6; for each protocol, change RMW percentage
-            elif "RMWFig6.json" in config_path:
+            if "RMWFig6.json" in config_path:
                 rmw_percentages = [.1, .3, .5, .7, .9]
                 for rmw in rmw_percentages:
                     update(config_path, "rmw_percentage", rmw)
@@ -144,17 +175,17 @@ def run():
                     run_experiment(results_extension_fig8, config_path)
 
             # For fig8 and fig11 This is the Cloudlab experiment that should really be run with 7 and 9 replicas
-            elif "fig8" in config_path or "fig11" in config_path:
-                num_replicas = [7, 9]
-
-                for n in num_replicas:
-                    update(config_path, "number_of_replicas", n)
-
-                    # For fig 8 or fig 11, now results file stricture is: TIMESTAMP/FIG#/PROTOCOL-NUM_REPLICAS/CLIENT/...
-                    results_extension_add = Path(str(results_extension) + "-" + (str(n)))
-
-                    setup_network_delay(config_path)
-                    run_experiment(results_extension_add, config_path)
+            # elif "fig8" in config_path or "fig11" in config_path:
+            #     num_replicas = [7, 9]
+            #
+            #     for n in num_replicas:
+            #         update(config_path, "number_of_replicas", n)
+            #
+            #         # For fig 8 or fig 11, now results file stricture is: TIMESTAMP/FIG#/PROTOCOL-NUM_REPLICAS/CLIENT/...
+            #         results_extension_add = Path(str(results_extension) + "-" + (str(n)))
+            #
+            #         setup_network_delay(config_path)
+            #         run_experiment(results_extension_add, config_path)
 
             # for fig9, data size is altered between trials
             elif "fig9" in config_path:

@@ -50,15 +50,15 @@ def main(results_path):
             print("Plotting fig5...")
             plot_fig5(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
                       latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"])
-        elif fig == "fig6":
-            print("Plotting fig6...")
-            plot_fig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths)
-        elif fig == "fig7":
-            print(
-                "Separate from automated plotting. Latencies were originanlly manually extracted. Use layered/plot.py")
-        elif fig == "fig8":
-            print(
-                "Plot was produced manually through extracting latencies from each sub experiment, finding percentiles and plotting")
+        # elif fig == "fig6":
+        #     print("Plotting fig6...")
+        #     plot_fig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths)
+        # elif fig == "fig7":
+        #     print(
+        #         "Separate from automated plotting. Latencies were originanlly manually extracted. Use layered/plot.py")
+        # elif fig == "fig8":
+        #     print(
+        #         "Plot was produced manually through extracting latencies from each sub experiment, finding percentiles and plotting")
         elif fig == "fig9":
             print("Plotting fig9...")
             plot_fig9(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
@@ -66,26 +66,54 @@ def main(results_path):
         elif fig == "fig11":
             # Old fig12 and fig12 n=5
             print("Seperate from automated plotting. Use scale/scale_plot.py. See README for details")
-        elif fig == "gryffFig6a":
-            print("Plotting gryffFig6a...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6a", latencies_folder_paths["gryff"],
+        elif fig == "fig6top":
+            print("Plotting fig6top...")
+            plot_fig6(plot_target_directory, csv_target_directory, "fig6top", latencies_folder_paths["gryff"],
                            latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
-        elif fig == "gryffFig6b":
-            print("Plotting gryffFig6b...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6b", latencies_folder_paths["gryff"],
+        elif fig == "fig6bottom":
+            print("Plotting fig6bottom...")
+            plot_fig6(plot_target_directory, csv_target_directory, "fig6bottom", latencies_folder_paths["gryff"],
                            latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
-        elif fig == "gryffFig6c":
-            print("Plotting gryffFig6c...")
-            plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6c", latencies_folder_paths["gryff"],
+        elif fig == "fig7a": # can re-use plot_fig6
+            print("Plotting fig7a...")
+            plot_fig6(plot_target_directory, csv_target_directory, "fig7a", latencies_folder_paths["gryff"],
                            latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        elif fig == "fig7b":
+            print("Plotting fig7b...")
+            plot_fig6(plot_target_directory, csv_target_directory, "fig7b", latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        elif fig == "fig7c":
+            print("Plotting fig7c...")
+            plot_fig6(plot_target_directory, csv_target_directory, "fig7c", latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        elif fig == "fig8top":
+            print("Plotting fig8top...")
+            plot_fig8(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        elif fig == "fig8bottom":
+            print("Plotting fig8bottom...")
+            plot_fig8(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
+                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        # elif fig == "gryffFig6a":
+        #     print("Plotting gryffFig6a...")
+        #     plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6a", latencies_folder_paths["gryff"],
+        #                    latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        # elif fig == "gryffFig6b":
+        #     print("Plotting gryffFig6b...")
+        #     plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6b", latencies_folder_paths["gryff"],
+        #                    latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        # elif fig == "gryffFig6c":
+        #     print("Plotting gryffFig6c...")
+        #     plot_gryffFig6(plot_target_directory, csv_target_directory, "gryff6c", latencies_folder_paths["gryff"],
+        #                    latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
         elif fig == "gryffFig8":
             print("Plotting gryffFig8...")
             plot_gryffFig8(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
                            latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
-        elif fig == "gryffFig9":
-            print("Plotting gryffFig9...")
-            plot_gryffFig9(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
-                           latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
+        # elif fig == "gryffFig9":
+        #     print("Plotting gryffFig9...")
+        #     plot_gryffFig9(plot_target_directory, csv_target_directory, latencies_folder_paths["gryff"],
+        #                    latencies_folder_paths["pineapple"], latencies_folder_paths["pqr"], latencies_folder_paths["epaxos"])
         elif fig == "gryffFig11":
             print("Plotting gryffFig11...")
             plot_gryffFig11(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths)
@@ -128,13 +156,13 @@ def plot_fig9(plot_target_directory, csv_target_directory, gryff_latency_folder,
     cdf_csvs_to_plot(plot_target_directory, "9-write-log", write_log_csvs, is_for_reads=False, log=True)
 
 
-def plot_fig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
-    # For fig6, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/....    
-    # latencies_folder_paths = TIMESTAMP/FIG6/PROTOCOL/
-
-    # throughputs is a dictionary of throughputs (lookup via throughputs[protocol][wp])
-    throughputs = calculate_tput_wp("6", results_path, csv_target_directory, latencies_folder_paths)
-    tput_wp_plot(plot_target_directory, "6", throughputs)
+# def plot_fig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
+#     # For fig6, now results file structure is: TIMESTAMP/FIG6/PROTOCOL-WRITE_PERCENTAGE/CLIENT/....
+#     # latencies_folder_paths = TIMESTAMP/FIG6/PROTOCOL/
+#
+#     # throughputs is a dictionary of throughputs (lookup via throughputs[protocol][wp])
+#     throughputs = calculate_tput_wp("6", results_path, csv_target_directory, latencies_folder_paths)
+#     tput_wp_plot(plot_target_directory, "6", throughputs)
 
 
 def plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
@@ -145,8 +173,7 @@ def plot_RMWFig6(plot_target_directory, results_path, csv_target_directory, late
     throughputs = calculate_tput_wp("rmw6", results_path, csv_target_directory, latencies_folder_paths)
     tput_wp_plot(plot_target_directory, "rmw6", throughputs, rmw=True)
 
-
-def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder,
+def plot_fig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder,
                    pineapple_latency_folder, pqr_latency_folder, epaxos_latency_folder=""):
     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory,
                                                                   gryff_latency_folder,
@@ -156,6 +183,17 @@ def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gry
     cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
     cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
+
+# def plot_gryffFig6(plot_target_directory, csv_target_directory, figure_name, gryff_latency_folder,
+#                    pineapple_latency_folder, pqr_latency_folder, epaxos_latency_folder=""):
+#     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf(figure_name, csv_target_directory,
+#                                                                   gryff_latency_folder,
+#                                                                   pineapple_latency_folder, pqr_latency_folder,
+#                                                                   epaxos_latency_folder, rmw=True)
+#
+#     cdf_csvs_to_plot(plot_target_directory, figure_name, read_csvs, is_for_reads=True)
+#     cdf_csvs_to_plot(plot_target_directory, figure_name + "-write", write_csvs, is_for_reads=False)
+#     cdf_csvs_to_plot(plot_target_directory, figure_name + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
 
 def plot_gryffFig8(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
@@ -173,21 +211,36 @@ def plot_gryffFig8(plot_target_directory, csv_target_directory, gryff_latency_fo
     # RMWs
     cdf_csvs_to_plot(plot_target_directory, "gryff8" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
-
-def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
+def plot_fig8(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
                    pqr_latency_folder, epaxos_latency_folder=""):
-    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff9", csv_target_directory, gryff_latency_folder,
+    read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("fig8", csv_target_directory, gryff_latency_folder,
                                                                   pineapple_latency_folder, pqr_latency_folder,
                                                                   epaxos_latency_folder, rmw=True)
 
     # Reads
-    cdf_csvs_to_plot(plot_target_directory, "gryff9", read_csvs, is_for_reads=True)
+    cdf_csvs_to_plot(plot_target_directory, "fig8", read_csvs, is_for_reads=True)
 
     # Writes
-    cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-write", write_csvs, is_for_reads=False)
+    cdf_csvs_to_plot(plot_target_directory, "fig8" + "-write", write_csvs, is_for_reads=False)
 
     # RMWs
-    cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
+    cdf_csvs_to_plot(plot_target_directory, "fig8" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
+
+
+# def plot_gryffFig9(plot_target_directory, csv_target_directory, gryff_latency_folder, pineapple_latency_folder,
+#                    pqr_latency_folder, epaxos_latency_folder=""):
+#     read_csvs, write_csvs, _, _, rmw_csvs, _ = calculate_csvs_cdf("gryff9", csv_target_directory, gryff_latency_folder,
+#                                                                   pineapple_latency_folder, pqr_latency_folder,
+#                                                                   epaxos_latency_folder, rmw=True)
+#
+#     # Reads
+#     cdf_csvs_to_plot(plot_target_directory, "gryff9", read_csvs, is_for_reads=True)
+#
+#     # Writes
+#     cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-write", write_csvs, is_for_reads=False)
+#
+#     # RMWs
+#     cdf_csvs_to_plot(plot_target_directory, "gryff9" + "-rmw", rmw_csvs, is_for_reads=False, rmw=True)
 
 
 def plot_gryffFig11(plot_target_directory, results_path, csv_target_directory, latencies_folder_paths):
