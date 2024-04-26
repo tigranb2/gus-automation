@@ -171,7 +171,7 @@ def kill_machines(config, executor):
         server_url = get_machine_url(config, server_name)
         futures.append(executor.submit(run_remote_command_sync('killall -9 server', server_url)))
         if config['replication_protocol'] != "epaxos":
-            if config['replciation_protocol'] == "pineapple" and config['tail_at_scale'] > 1:
+            if config['replication_protocol'] == "pineapple" and config['tail_at_scale'] > 1:
                 futures.append(executor.submit(run_remote_command_sync('killall -9 clientnew', server_url)))
             else:
                 futures.append(executor.submit(run_remote_command_sync('killall -9 client', server_url)))
