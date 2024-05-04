@@ -14,17 +14,17 @@
   "server_ping_latencies": {
     "california": {
       "california": 0,
-      "ireland": 151,
+      "ireland": 88,
       "virginia": 72
     },
     "ireland": {
-      "california": 151,
+      "california": 88,
       "ireland": 0,
-      "virginia": 88
+      "virginia": 151
     },
     "virginia": {
       "california": 72,
-      "ireland": 88,
+      "ireland": 151,
       "virginia": 0
     }
   },
